@@ -1,0 +1,10 @@
+{
+    "require": {
+        "amphp/websocket-client": "^1.0",
+        "php-amqplib/php-amqplib": "^3.2",
+        "amphp/file": "^2.0",
+        "phpseclib/phpseclib": "^3.0",
+        "daverandom/libdns": "^2.0",
+        "team-reflex/discord-php": "^7.0"
+    }
+}

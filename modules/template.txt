@@ -1,0 +1,17 @@
+<?php
+
+$cmd = "";
+$cmdlist[] = $cmd;
+$htmlhelp[$cmd]["commands"][] = $cmd;
+$htmlhelp[$cmd]["title"] = "";
+$htmlhelp[$cmd]["desc"] = "";
+$htmlhelp[$cmd]["usages"][] = "!$cmd";
+//$htmlhelp[$cmd]["seealso"][] = "";
+$funcs[] = function ($channel, $userid, $username, $cmd, $vars, $text)
+{
+	if ($cmd === "!...")
+	{
+		return "return something";
+	}
+	return false;
+};
