@@ -17,6 +17,10 @@ April 2022 This bot was originally created for the HighViber (Mighty Networks) a
 
 May 2022 Simultaneous Discord support added.
 
+## Command Help
+
+Help and command documentation is available at [r2d2bot.tk](https://r2d2bot.tk).
+
 ## Requirements
 
 - Linux
