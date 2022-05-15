@@ -33,7 +33,7 @@
 		<table>
 			<tr><th class="tdmin">Command(s)</th><th>Description / Usage</th></tr>
 			<?php
-			exec("ls /var/www/chatbot/modules/*.php", $modules);
+			exec("ls /var/www/r2d2/modules/*.php", $modules);
 			foreach ($modules as $module) require_once($module);
 			ksort($htmlhelp);
 			foreach ($htmlhelp as $help)
