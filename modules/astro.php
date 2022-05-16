@@ -88,10 +88,10 @@ $funcs[] = function ($channel, $userid, $username, $cmd, $vars, $text)
 
 		$message .= "----------------------------<br />";
 		$message .= "♂ Masculine $astro_masculine ♀ Feminine  $astro_feminine<br />";
-		$message .= "  Fire	  $astro_fire   Earth	 $astro_earth<br />";
-		$message .= "  Air	   $astro_air   Water	 $astro_water<br />";
-		$message .= "  Fixed	 $astro_fixed   Mutable   $astro_mutable<br />";
-		$message .= "		 Cardinal $astro_cardinal<br />";
+		$message .= "  Fire      $astro_fire   Earth     $astro_earth<br />";
+		$message .= "  Air       $astro_air   Water     $astro_water<br />";
+		$message .= "  Fixed     $astro_fixed   Mutable   $astro_mutable<br />";
+		$message .= "         Cardinal $astro_cardinal<br />";
 		$message .= "----------------------------<br />";
 
 		$aspects = substr($results, strpos($results, "class=\"datatable2\""));
@@ -132,93 +132,93 @@ $funcs[] = function ($channel, $userid, $username, $cmd, $vars, $text)
 		while (strlen($positives) < 4) $positives = " " . $positives;
 		while (strlen($negatives) < 5) $negatives = " " . $negatives;
 		$message .= "Positive $positives Negative $negatives<br />";
-		$message .= "		Balance " . ($positives + $negatives);
+		$balance = $positives + $negatives;
+		$message .= "        Balance $balance";
 		return "<pre>$message</pre>";
 	}
 	return false;
 };
-
 function astro_get_emoji($input)
 {
-	global $astro_masculine, $astro_feminine, $astro_earth, $astro_water, $astro_air, $astro_fire, $astro_fixed, $astro_mutable, $astro_cardinal;
-	if ($input == "Aries	")
+	global $astro_masculine,$astro_feminine,$astro_earth,$astro_water,$astro_air,$astro_fire,$astro_fixed,$astro_mutable,$astro_cardinal;
+	if($input == "Aries    ")
 	{
 		$astro_masculine++;
 		$astro_fire++;
 		$astro_cardinal++;
 		return "♈︎ $input";
 	}
-	if ($input == "Taurus   ")
+	if($input == "Taurus   ")
 	{
 		$astro_feminine++;
 		$astro_earth++;
 		$astro_fixed++;
 		return "♉︎ $input";
 	}
-	if ($input == "Gemini   ")
+	if($input == "Gemini   ")
 	{
 		$astro_masculine++;
 		$astro_air++;
 		$astro_mutable++;
 		return "♊︎ $input";
 	}
-	if ($input == "Cancer   ")
+	if($input == "Cancer   ")
 	{
 		$astro_feminine++;
 		$astro_water++;
 		$astro_cardinal++;
 		return "♋︎ $input";
 	}
-	if ($input == "Leo	  ")
+	if($input == "Leo      ")
 	{
 		$astro_masculine++;
 		$astro_fire++;
 		$astro_fixed++;
 		return "♌︎ $input";
 	}
-	if ($input == "Virgo	")
+	if($input == "Virgo    ")
 	{
 		$astro_feminine++;
 		$astro_earth++;
 		$astro_mutable++;
 		return "♍︎ $input";
 	}
-	if ($input == "Libra	")
+	if($input == "Libra    ")
 	{
 		$astro_masculine++;
 		$astro_air++;
 		$astro_cardinal++;
 		return "♎︎ $input";
 	}
-	if ($input == "Scorpio  ")
+	if($input == "Scorpio  ")
 	{
 		$astro_feminine++;
 		$astro_water++;
 		$astro_fixed++;
 		return "♏︎ $input";
 	}
-	if ($input == "Sagittari")
+	if($input == "Sagittari")
 	{
 		$astro_masculine++;
 		$astro_fire++;
 		$astro_mutable++;
 		return "♐︎ $input";
 	}
-	if ($input == "Capricorn")
+	if($input == "Capricorn")
 	{
 		$astro_feminine++;
 		$astro_earth++;
 		$astro_cardinal++;
 		return "♑︎ $input";
 	}
-	if ($input == "Aquarius ")
+	if($input == "Aquarius ")
 	{
 		$astro_masculine++;
 		$astro_air++;
 		$astro_fixed++;
 		return "♒︎ $input";
 	}
-	if ($input == "Pisces   ")
+	if($input == "Pisces   ")
 	{
 		$astro_feminine++;
 		$astro_water++;
@@ -226,32 +226,32 @@ function astro_get_emoji($input)
 		return "♓︎ $input";
 	}
 
-	if ($input == "Sun	") return "☉ Sun	";
-	if ($input == "Moon   ") return "☾ Moon   ";
-	if ($input == "Mercury") return "☿ Mercury";
-	if ($input == "Venus  ") return "♀ Venus  ";
-	if ($input == "Mars   ") return "♂ Mars   ";
-	if ($input == "Jupiter") return "♃ Jupiter";
-	if ($input == "Saturn ") return "♄ Saturn ";
-	if ($input == "Uranus ") return "♅ Uranus ";
-	if ($input == "Neptune") return "♆ Neptune";
-	if ($input == "Pluto  ") return "♇ Pluto  ";
-	if ($input == "NNode  ") return "  N Node ";
-	return "  " . $input;
+	if($input == "Sun    ") return "☉ Sun    ";
+	if($input == "Moon   ") return "☾ Moon   ";
+	if($input == "Mercury") return "☿ Mercury";
+	if($input == "Venus  ") return "♀ Venus  ";
+	if($input == "Mars   ") return "♂ Mars   ";
+	if($input == "Jupiter") return "♃ Jupiter";
+	if($input == "Saturn ") return "♄ Saturn ";
+	if($input == "Uranus ") return "♅ Uranus ";
+	if($input == "Neptune") return "♆ Neptune";
+	if($input == "Pluto  ") return "♇ Pluto  ";
+	if($input == "NNode  ") return "  N Node ";
+	return "  ".$input;
 }
 
 function valid($input)
 {
 	return($input == "Sun" ||
-			$input == "Moon" ||
-			$input == "Mercury" ||
-			$input == "Venus" ||
-			$input == "Mars" ||
-			$input == "Jupiter" ||
-			$input == "Saturn" ||
-			$input == "Uranus" ||
-			$input == "Neptune" ||
-			$input == "Pluto" ||
-			$input == "Lilith" ||
-			$input == "NNode");
+		$input == "Moon" ||
+		$input == "Mercury" ||
+		$input == "Venus" ||
+		$input == "Mars" ||
+		$input == "Jupiter" ||
+		$input == "Saturn" ||
+		$input == "Uranus" ||
+		$input == "Neptune" ||
+		$input == "Pluto" ||
+		$input == "Lilith" ||
+		$input == "NNode");
 }

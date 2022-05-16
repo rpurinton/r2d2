@@ -11,23 +11,23 @@ $funcs[] = function ($channel, $userid, $username, $cmd, $vars, $text)
 	if ($cmd == "!soc")
 	{
 		return "<b>The Scale of Consciousness</b><br /><pre>
-   700+ Enlightenment   
-   600  Peace          E
- L 540  Joy            X
- O 500  Love           P
- V 400  Reason         A
- E 350  Acceptance     N
-   310  Willingness    D
- - 250  Neutrality     -
-   200  Courage        C
-   175  Pride          O
- F 150  Anger          N
- E 125  Desire         T
- A 100  Fear           R
- R  75  Grief          A
-	50  Apathy		 C
-	30  Guilt		  T
-	20  Shame		   </pre>";
+   | 700+ Enlightenment | E 
+ L | 600  Peace         | X 
+ O | 540  Joy           | P 
+ V | 500  Love          | A 
+ E | 400  Reason        | N 
+ S | 350  Acceptance    | D 
+   | 310  Willingness   |   
+ - | 250  Neutrality    | - 
+   | 200  Courage       |   
+   | 175  Pride         | C 
+ F | 150  Anger         | O 
+ E | 125  Desire        | N 
+ A | 100  Fear          | T 
+ R |  75  Grief         | R 
+ S |  50  Apathy        | A 
+   |  30  Guilt         | C 
+   |  20  Shame         | T </pre>";
 	}
 	return false;
 };
