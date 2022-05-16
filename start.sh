@@ -19,4 +19,3 @@ echo -n > logs/viber-logger.log
 /usr/bin/nohup /usr/bin/php -f highviber/run-viber-worker.php 3 </dev/null &>logs/viber-worker3.log 2>&1 &
 /usr/bin/nohup /usr/bin/php -f highviber/run-viber-worker.php 4 </dev/null &>logs/viber-worker4.log 2>&1 &
 /usr/bin/nohup /usr/bin/php -f highviber/run-viber-logger.php </dev/null &>logs/viber-logger.log 2>&1 &
-./monitor.php
