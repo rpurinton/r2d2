@@ -12,9 +12,9 @@ $funcs[] = function ($channel, $userid, $username, $cmd, $vars, $text)
 {
 	if ($cmd == "!define")
 	{
+		if($vars === "") return "must specify a word";
 		start_typing($channel);
-		if (strpos($vars, " ") !== false) $vars = substr($vars, 0, strpos($vars, " "));
-		$vars = urlencode($vars);
+		$vars = urlencode(strtolower(firstname($vars)));
 		$requestUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/$vars";
 		$results = @json_decode(@file_get_contents($requestUrl), true);
 		if (!isset($results[0]["meanings"]))
