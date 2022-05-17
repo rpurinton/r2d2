@@ -115,7 +115,7 @@ function send_message($socket_id, $channel, $message)
 function log_sql($userid, $username, $text)
 {
 	global $levels;
-	discord_send_message("976233852685131786","**$username**  ".fix_hyperlinks(discord_cleanup($text)));
+	discord_send_message("976233852685131786","**$username**  ".discord_cleanup($text));
 	$sql = mysqli_connect("127.0.0.1", "chatbot", "chatbot", "chatbot");
 	$username2 = mysqli_real_escape_string($sql, $username);
 	$text2 = mysqli_real_escape_string($sql, $text);
@@ -151,6 +151,7 @@ function discord_send_message($channel, $message)
 
 function discord_cleanup($message)
 {
+	$message = fix_img($message);
 	$message = my_replace("<br />", "\n", $message);
 	$message = my_replace("<i>", "*", $message);
 	$message = my_replace("</i>", "*", $message);
@@ -183,4 +184,15 @@ function fix_hyperlinks($message)
 		$message = "$previous $thelink $theremainder";
 	}
 	return ($message);
+}
+
+function fix_img($message)
+{
+	$start = strpos($message,"src=\"");
+	if($start !== false)
+	{
+		$message = substr($message,$start+5);
+		$message = substr($message,0,strpos($message,"?"));
+	}
+	return $message;
 }
