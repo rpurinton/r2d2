@@ -4,6 +4,8 @@ require("vendor/autoload.php");
 require_once("modules/level.php");
 require_once("modules/core-functions.php");
 
+$webhooks = json_decode(file_get_contents("discord/discord-webhooks.json"), true);
+
 $connection = array();
 $socket_id = "";
 $endpoint = "a13be185126229b1a8fe";
@@ -113,6 +115,7 @@ function send_message($socket_id, $channel, $message)
 function log_sql($userid, $username, $text)
 {
 	global $levels;
+	discord_send_message("976233852685131786",$username.": ".fix_hyperlinks(discord_cleanup($text)));
 	$sql = mysqli_connect("127.0.0.1", "chatbot", "chatbot", "chatbot");
 	$username2 = mysqli_real_escape_string($sql, $username);
 	$text2 = mysqli_real_escape_string($sql, $text);
@@ -125,4 +128,58 @@ function log_sql($userid, $username, $text)
 		return $levels[$message_count];
 	}
 	return 0;
+}
+
+function discord_send_message($channel, $message)
+{
+	global $webhooks;
+	$webhookurl = $webhooks[$channel];
+	$timestamp = date("c", strtotime("now"));
+	$data["content"] = discord_cleanup($message);
+	$json_data = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+	$ch = curl_init($webhookurl);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	$response = curl_exec($ch);
+	echo $response;
+	curl_close($ch);
+}
+
+function discord_cleanup($message)
+{
+	$message = my_replace("<br />", "\n", $message);
+	$message = my_replace("<i>", "*", $message);
+	$message = my_replace("</i>", "*", $message);
+	$message = my_replace("<b>", "**", $message);
+	$message = my_replace("</b>", "**", $message);
+	$message = my_replace("<u>", "__", $message);
+	$message = my_replace("</u>", "__", $message);
+	$message = my_replace("<pre>", "`", $message);
+	$message = my_replace("</pre>", "`", $message);
+	$message = fix_hyperlinks($message);
+	return html_entity_decode($message);
+}
+
+function fix_hyperlinks($message)
+{
+	while (strpos($message, "<a href") !== false)
+	{
+		$pos = strpos($message, "<a href");
+		$previous = substr($message, 0, $pos);
+		$thelink = substr($message, $pos);
+		$pos2 = strpos($thelink, "</a>");
+		$theremainder = substr($thelink, $pos2 + 4);
+		$thelink = substr($thelink, 0, $pos2);
+		$thelink = my_replace("<a href=\"", "", $thelink);
+		$thelink = my_replace("</a>", "", $thelink);
+		$thelink = my_replace("\" target=\"r2d2\">", "##!##", $thelink);
+		$thelink = explode("##!##", $thelink);
+		$thelink = "[" . $thelink[1] . "](" . $thelink[0] . ")";
+		$message = "$previous $thelink $theremainder";
+	}
+	return ($message);
 }
