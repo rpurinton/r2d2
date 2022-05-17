@@ -29,7 +29,7 @@ $funcs[] = function ($channel, $userid, $username, $cmd, $vars, $text)
 		mysqli_query($sql, "UPDATE `users` SET `tails` = `tails`+1 WHERE `userid` = '$userid'");
 		if ($result = mysqli_fetch_assoc(mysqli_query($sql, "SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'")))
 		{
-			extract($row);
+			extract($result);
 			return "@$first: it's tails... heads: $heads tails: $tails";
 		}
 		else return "@$first: it's tails";
