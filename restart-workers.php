@@ -13,4 +13,3 @@ foreach ($ps as $ps0)
 		passthru("kill $pid");
 	}
 }
-passthru("cd /var/www/r2d2 && ./monitor.php");
