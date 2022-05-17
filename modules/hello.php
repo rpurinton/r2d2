@@ -4,9 +4,9 @@ $funcs[] = function ($channel, $userid, $username, $cmd, $vars, $text)
 {
 	$text = strtolower($text);
 	if (
-			$text == "hello " ||
-			$text == "hi " ||
-			$text == "hey " ||
+			$text == "hello" ||
+			$text == "hi" ||
+			$text == "hey" ||
 			strpos($text, "hello r2") !== false ||
 			strpos($text, "hi r2") !== false ||
 			strpos($text, "hey r2") !== false ||

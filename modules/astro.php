@@ -197,11 +197,12 @@ function astro_get_emoji($input)
 		$astro_fixed++;
 		return "♏︎ $input";
 	}
-	if($input == "Sagittari")
+	if($input == "Sagittarius")
 	{
 		$astro_masculine++;
 		$astro_fire++;
 		$astro_mutable++;
+		$input = "Sagittari";
 		return "♐︎ $input";
 	}
 	if($input == "Capricorn")
