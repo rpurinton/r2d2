@@ -16,9 +16,9 @@ $funcs[] = function ($channel, $userid, $username, $cmd, $vars, $text)
 		global $htmlhelp;
 		$message = "";
 		if (isset($vars) && substr($vars, 0, 1) == "!") $vars = substr($vars, 1);
-		if (isset($vars) && isset($htmlhelp[$vars]))
+		if (isset($vars) && isset($htmlhelp[strtolower($vars)]))
 		{
-			$help = $htmlhelp[$vars];
+			$help = $htmlhelp[strtolower($vars)];
 			$message = "<b>" . $help["title"] . "</b><br />";
 			$message .= "<i>" . $help["desc"] . "</i><br /><br />";
 			$message .= "<b><u>Usage Example</u></b><br /><pre>";
