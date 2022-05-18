@@ -153,6 +153,7 @@ function discord_cleanup($message)
 {
 	$message = fix_img($message);
 	$message = my_replace("<br />", "\n", $message);
+	$message = my_replace("<br>", "\n", $message);
 	$message = my_replace("<i>", "*", $message);
 	$message = my_replace("</i>", "*", $message);
 	$message = my_replace("<b>", "**", $message);
