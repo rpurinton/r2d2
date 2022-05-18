@@ -1,5 +1,5 @@
 <?php
-
+define("_PLATFORM_","discord");
 require("vendor/autoload.php");
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;

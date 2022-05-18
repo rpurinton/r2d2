@@ -1,5 +1,5 @@
 <?php
-
+define("_PLATFORM_","highviber");
 require("vendor/autoload.php");
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
