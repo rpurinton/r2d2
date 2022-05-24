@@ -12,20 +12,20 @@ $html_help[$cmd]["seealso"][] = "cookie";
 $html_help[$cmd]["seealso"][] = "quote";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!zen")
-	{
-		if ($vars != "" && (!is_numeric($vars) || $vars < 1 || $vars > 101)) return $this->sendReply($data, "number must be between 1 and 101");
-                mysqli_select_db($this->sql,"koans");
-		if ($vars === "")
-		{
-			$query = "SELECT * FROM `koans` ORDER BY RAND() LIMIT 0,1;";
-		}
-		else
-		{
-			$query = "SELECT * FROM `koans` WHERE `id` = $vars";
-		}
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, $query)));
-		$this->sendReply($data, "<b><u>Zen Koan $id - $title</u></b><br /><i>$text</i>");
-	}
+    extract($data);
+    if ($cmd == "!zen")
+    {
+        if ($vars != "" && (!is_numeric($vars) || $vars < 1 || $vars > 101)) return $this->sendReply($data, "number must be between 1 and 101");
+        mysqli_select_db($this->sql, "koans");
+        if ($vars === "")
+        {
+            $query = "SELECT * FROM `koans` ORDER BY RAND() LIMIT 0,1;";
+        }
+        else
+        {
+            $query = "SELECT * FROM `koans` WHERE `id` = $vars";
+        }
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, $query)));
+        $this->sendReply($data, "<b><u>Zen Koan $id - $title</u></b><br /><i>$text</i>");
+    }
 };

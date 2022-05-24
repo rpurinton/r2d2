@@ -16,22 +16,22 @@ $html_help[$cmd]["seealso"][] = "relationship";
 $html_help[$cmd]["seealso"][] = "oracle";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!tarot")
-	{
-		$first = $this->firstname($username);
-                mysqli_select_db($this->sql,"tarot");
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` ORDER BY RAND() LIMIT 0,1")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			return $this->sendReply($data, "Pulling a card for $first...<br />&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i>");
-		}
-		else
-		{
-			return $this->sendReply($data, "Pulling a card for $first...<br />&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i>");
-		}
-	}
+    extract($data);
+    if ($cmd == "!tarot")
+    {
+        $first = $this->firstname($username);
+        mysqli_select_db($this->sql, "tarot");
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` ORDER BY RAND() LIMIT 0,1")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            return $this->sendReply($data, "Pulling a card for $first...<br />&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i>");
+        }
+        else
+        {
+            return $this->sendReply($data, "Pulling a card for $first...<br />&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i>");
+        }
+    }
 };
 
 $cmd = "daily";
@@ -50,57 +50,57 @@ $html_help[$cmd]["seealso"][] = "relationship";
 $html_help[$cmd]["seealso"][] = "oracle";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!daily")
-	{
-		mysqli_select_db($this->sql,"tarot");
-		for ($i = 1; $i < 79; $i++)
-		{
-			$deck[$i] = $i;
-		}
-		$first = $this->firstname($username);
-		$message = "Daily Tarot requested by $first...<br /><br />";
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>What things are on your mind? What are you thinking about a lot today?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
-		}
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>How are your emotions today? What is the dominant feeling for today?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
-		}
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>What tasks are you focused on accomplishing today?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i>";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i>";
-		}
-		$this->sendReply($data, $message);
-	}
+    extract($data);
+    if ($cmd == "!daily")
+    {
+        mysqli_select_db($this->sql, "tarot");
+        for ($i = 1; $i < 79; $i++)
+        {
+            $deck[$i] = $i;
+        }
+        $first = $this->firstname($username);
+        $message = "Daily Tarot requested by $first...<br /><br />";
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>What things are on your mind? What are you thinking about a lot today?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
+        }
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>How are your emotions today? What is the dominant feeling for today?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
+        }
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>What tasks are you focused on accomplishing today?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i>";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i>";
+        }
+        $this->sendReply($data, $message);
+    }
 };
 
 $cmd = "dream";
@@ -118,61 +118,61 @@ $html_help[$cmd]["seealso"][] = "tarot";
 $html_help[$cmd]["seealso"][] = "relationship";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!dream")
-	{
-		mysqli_select_db($this->sql,"tarot");
-		for ($i = 1; $i < 79; $i++)
-		{
-			$deck[$i] = $i;
-		}
-		$first = $this->firstname($username);
-		$message = "Dream Tarot requested by $first...<br /><br />";
+    extract($data);
+    if ($cmd == "!dream")
+    {
+        mysqli_select_db($this->sql, "tarot");
+        for ($i = 1; $i < 79; $i++)
+        {
+            $deck[$i] = $i;
+        }
+        $first = $this->firstname($username);
+        $message = "Dream Tarot requested by $first...<br /><br />";
 
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>What feelings did this dream stem from? What was the underlying emotion behind it?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
-		}
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>What feelings did this dream stem from? What was the underlying emotion behind it?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
+        }
 
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>What is the dream trying to tell me?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
-		}
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>What is the dream trying to tell me?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
+        }
 
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>How can I apply this dream's lessons to my waking life?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
-		}
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>How can I apply this dream's lessons to my waking life?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
+        }
 
-		$this->sendReply($data, $message);
-	}
+        $this->sendReply($data, $message);
+    }
 };
 
 $cmd = "relationship";
@@ -191,59 +191,59 @@ $html_help[$cmd]["seealso"][] = "dream";
 $html_help[$cmd]["seealso"][] = "oracle";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!relationship")
-	{
-                mysqli_select_db($this->sql,"tarot");
-		for ($i = 1; $i < 79; $i++)
-		{
-			$deck[$i] = $i;
-		}
-		$first = $this->firstname($username);
-		$message = "Relationship Tarot requested by $first...<br /><br />";
+    extract($data);
+    if ($cmd == "!relationship")
+    {
+        mysqli_select_db($this->sql, "tarot");
+        for ($i = 1; $i < 79; $i++)
+        {
+            $deck[$i] = $i;
+        }
+        $first = $this->firstname($username);
+        $message = "Relationship Tarot requested by $first...<br /><br />";
 
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>What is your role in this relationship? How do you perceive yourself, and how does that affect your partnership?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
-		}
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>What is your role in this relationship? How do you perceive yourself, and how does that affect your partnership?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
+        }
 
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>How would you describe the relationship? What are the characteristics of it?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
-		}
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>How would you describe the relationship? What are the characteristics of it?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
+        }
 
-		$card = array_rand($deck);
-		unset($deck[$card]);
-		$message .= "<b>What is their role in the relationship? How do you perceive your partner? And how does that affect the partnership?</b><br />";
-		extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
-		$reverse = rand(0, 1);
-		if ($reverse === 1)
-		{
-			$message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
-		}
-		else
-		{
-			$message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
-		}
+        $card = array_rand($deck);
+        unset($deck[$card]);
+        $message .= "<b>What is their role in the relationship? How do you perceive your partner? And how does that affect the partnership?</b><br />";
+        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        $reverse = rand(0, 1);
+        if ($reverse === 1)
+        {
+            $message .= "&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i><br /><br />";
+        }
+        else
+        {
+            $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
+        }
 
-		$this->sendReply($data, $message);
-	}
+        $this->sendReply($data, $message);
+    }
 };

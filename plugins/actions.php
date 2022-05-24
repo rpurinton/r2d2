@@ -11,15 +11,15 @@ $html_help[$cmd]["usages"][] = "!$cmd Mary";
 $html_help[$cmd]["seealso"][] = "slap";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!cwtch")
-	{
-		if ($vars == "")
-		{
-			$vars = $this->firstname($username);
-		}
-		$this->sendReply($data, "<i>*cwtches $vars*</i> &#129303;");
-	}
+    extract($data);
+    if ($cmd == "!cwtch")
+    {
+        if ($vars == "")
+        {
+            $vars = $this->firstname($username);
+        }
+        $this->sendReply($data, "<i>*cwtches $vars*</i> &#129303;");
+    }
 };
 
 $cmd = "slap";
@@ -33,10 +33,10 @@ $html_help[$cmd]["usages"][] = "!$cmd Bobby";
 $html_help[$cmd]["seealso"][] = "cwtch";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!slap")
-	{
-		if ($vars == "") $vars = $this->firstname($username);
-		$this->sendReply($data, "<i>slaps $vars around a bit with a large trout</i>");
-	}
+    extract($data);
+    if ($cmd == "!slap")
+    {
+        if ($vars == "") $vars = $this->firstname($username);
+        $this->sendReply($data, "<i>slaps $vars around a bit with a large trout</i>");
+    }
 };

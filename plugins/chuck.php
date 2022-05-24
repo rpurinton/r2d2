@@ -11,11 +11,11 @@ $html_help[$cmd]["seealso"][] = "quote";
 $html_help[$cmd]["seealso"][] = "love";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!chuck" || $cmd == "!fact")
-	{
-		$requestUrl = "https://api.chucknorris.io/jokes/random";
-		$results = json_decode(file_get_contents($requestUrl), true);
-		$this->sendReply($data,"True Fact: " . $results["value"]);
-	}
+    extract($data);
+    if ($cmd == "!chuck" || $cmd == "!fact")
+    {
+        $requestUrl = "https://api.chucknorris.io/jokes/random";
+        $results = json_decode(file_get_contents($requestUrl), true);
+        $this->sendReply($data, "True Fact: " . $results["value"]);
+    }
 };

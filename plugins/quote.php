@@ -10,12 +10,12 @@ $html_help[$cmd]["seealso"][] = "love";
 $html_help[$cmd]["seealso"][] = "chuck";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!quote")
-	{
-		extract(json_decode(file_get_contents("https://api.quot.tk"), true));
-		$this->sendReply($data,"<i>\"$quote #$subject\"</i> - <b>$author</b>");
-	}
+    extract($data);
+    if ($cmd == "!quote")
+    {
+        extract(json_decode(file_get_contents("https://api.quot.tk"), true));
+        $this->sendReply($data, "<i>\"$quote #$subject\"</i> - <b>$author</b>");
+    }
 };
 
 $cmd = "love";
@@ -29,10 +29,10 @@ $html_help[$cmd]["seealso"][] = "chuck";
 
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!love")
-	{
-		extract(json_decode(file_get_contents("https://api.quot.tk?subject=love"), true));
-		$this->sendReply($data,"<i>\"$quote #$subject\"</i> - <b>$author</b>");
-	}
+    extract($data);
+    if ($cmd == "!love")
+    {
+        extract(json_decode(file_get_contents("https://api.quot.tk?subject=love"), true));
+        $this->sendReply($data, "<i>\"$quote #$subject\"</i> - <b>$author</b>");
+    }
 };

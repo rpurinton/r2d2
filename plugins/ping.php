@@ -9,9 +9,9 @@ $html_help[$cmd]["usages"][] = "!$cmd";
 
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd === "!ping")
-	{
-		$this->sendReply($data,"POOOONNNNNGGGGGG!");
-	}
+    extract($data);
+    if ($cmd === "!ping")
+    {
+        $this->sendReply($data, "POOOONNNNNGGGGGG!");
+    }
 };

@@ -8,10 +8,10 @@ $html_help[$cmd]["desc"] = "Gives you a simple version of David R. Hawkins Scale
 $html_help[$cmd]["usages"][] = "!$cmd";
 $funcs[] = function ($data)
 {
-	extract($data);
-	if ($cmd == "!soc")
-	{
-		$this->sendReply($data, "<b>The Scale of Consciousness</b><br /><pre>
+    extract($data);
+    if ($cmd == "!soc")
+    {
+        $this->sendReply($data, "<b>The Scale of Consciousness</b><br /><pre>
    | 700+ Enlightenment | E 
  L | 600  Peace         | X 
  O | 540  Joy           | P 
@@ -29,5 +29,5 @@ $funcs[] = function ($data)
  S |  50  Apathy        | A 
    |  30  Guilt         | C 
    |  20  Shame         | T </pre>");
-	}
+    }
 };
