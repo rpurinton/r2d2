@@ -13,10 +13,10 @@ This bot requires several files which are not provided and will NOT run for you.
 
 ## History
 
-### April 2022
+#### April 2022
 - This bot was originally created for the HighViber (Mighty Networks) app.  
 
-### May 2022 
+#### May 2022 
 - Simultaneous Discord support added
 - Rewritten into Classes
 - JSON config files
