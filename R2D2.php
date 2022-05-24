@@ -1,6 +1,8 @@
 <?php
+
 namespace R2D2;
 require_once(__DIR__."/vendor/autoload.php");
+
 use Discord\Discord;
 use Amp\Websocket;
 use React\EventLoop\Factory;
