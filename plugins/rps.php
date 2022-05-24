@@ -66,7 +66,6 @@ $funcs[] = function ($data)
         $rock = "&#129704;";
         $paper = "&#129531;";
         $scissors = "&#9986;";
-
         $first = $this->firstname($username);
         mysqli_select_db($this->sql, "chatbot");
         $rand = rand(0, 2);
@@ -93,7 +92,7 @@ $funcs[] = function ($data)
         mysqli_query($this->sql, "UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
         if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
         {
-            extract($row);
+            extract($result);
             return $this->sendReply($data, "@$first: $paper, Me: $rock, You win...<br />your personal record: W: $win L: $loss T: $tie");
         }
         else return $this->sendReply($data, "@$first: $paper, Me: $rock, You win...");
