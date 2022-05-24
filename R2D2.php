@@ -15,21 +15,15 @@ class Base
 	protected $config;
 	protected $mq_conn;
 	protected $mq_chan;
-	protected $discord_webhooks;
-	protected $discord_log_channel;
-	protected $discord_relay_channel;
-	protected $highviber_csrf;
-	protected $highviber_push_headers;
-	protected $highviber_chat_headers;
-	protected $highviber_public_channel;
 
 	function __construct()
 	{
 		$config = json_decode(file_get_contents(__DIR__."/config.json"),true);
-		$this->config = $config;
 		$this->rabbitConnect($config["rabbit"]);
-		$this->readDiscordWebhooks($config["discord"]);
-		$this->readHighViberFiles($config["highviber"]);
+		$config["discord"] = json_decode(file_get_contents(__DIR__."/".$config["discord"]["config"]),true);
+		$config["highviber"] = json_decode(file_get_contents(__DIR__."/".$config["highviber"]["config"]),true);
+		$config["youtube"] = json_decode(file_get_contents(__DIR__."/".$config["youtube"]["config"]),true);
+		$this->config = $config;
 	}
 
 	function __destruct()
@@ -52,39 +46,13 @@ class Base
 		$this->mq_chan->basic_publish($message,'',$queue);
 	}
 
-	protected function readDiscordWebhooks($config)
+	protected function readDiscordConfig($config_file)
 	{
 		extract($config);
-		$this->discord_log_channel = $log_channel;
-		$this->discord_relay_channel = $relay_channel;
-		$this->discord_webhooks = json_decode(file_get_contents(__DIR__."/$webhooks_file"),true);
 	}
 
-	protected function readHighViberFiles($config)
+	protected function readHighViberConfig($config_file)
 	{
-		extract($config);
-		$this->highviber_public_channel = $public_channel;
-		$this->highviber_csrf = urldecode(file_get_contents(__DIR__."/$csrf_file"));
-		$this->highviber_push_headers = unserialize(file_get_contents(__DIR__."/$push_file"));
-		$headers = unserialize(file_get_contents(__DIR__."/$chat_file"));
-		unset($headers[21]);
-		unset($headers[22]);
-		unset($headers[23]);
-		$headers[] = "Dnt: 1";
-		$headers[] = "X-Csrf-Token: ".$this->highviber_csrf;
-		foreach($headers as $key => $value)
-		{
-			if(substr($value,0,6) === "Cookie")
-			{
-				$cookie = str_replace("Cookie: ","",$value);
-				$cookie = explode("; ",$cookie);
-				unset($headers[$key]);
-				foreach ($cookie as $value) $headers[] = "Cookie: $value";
-			}
-		}
-		$headers[] = "Cookie: locale=";
-		$headers[] = "Cookie: CSRF-TOKEN=".$this->highviber_csrf;
-		$this->highviber_chat_headers = $headers;
 	}
 
 	protected function discordQueue($channel,$message)
@@ -94,12 +62,12 @@ class Base
 
 	protected function myLog($message)
 	{
-		$this->discordQueue($this->discord_log_channel,$message);
+		$this->discordQueue($this->config["discord"]["log_channel"],$message);
 	}
 
 	protected function discordSend($channel, $message)
 	{
-	        $curl = curl_init($this->discord_webhooks[$channel]);
+	        $curl = curl_init($this->config["discord"][$channel]);
 	        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
 	        curl_setopt($curl, CURLOPT_POST, 1);
 	        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode(["content" => $this->discordClean($message)], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
@@ -382,7 +350,6 @@ class Worker Extends Base
 	protected $html_help;
 	protected $worker_id;
 	protected $levels_reverse;
-	protected $youtube_apikey;
 	protected $plugin_functions;
 
 	function __construct($id)
@@ -391,7 +358,6 @@ class Worker Extends Base
 		echo("Starting Worker $id...\n");
 		$this->worker_id = $id;
 		$this->sqlConnect($this->config["sql"]);
-		$this->readYouTubeApiKey($this->config["youtube"]);
 		$this->defineLevels();
 		$this->loadPlugins();
 		$this->mq_chan->basic_consume("worker","worker$id",false,false,false,false,function ($message)
@@ -435,12 +401,6 @@ class Worker Extends Base
 			or die("sql connection error\n");
 	}
 
-	protected function readYouTubeApiKey($config)
-	{
-		extract($config);
-		$this->youtube_apikey = trim(file_get_contents(__DIR__."/$apikey_file"));
-	}
-
 	protected function defineLevels()
 	{
 		$total = 0;
@@ -464,9 +424,9 @@ class Worker Extends Base
 				break;
 			case "highviber":
 				$this->highviberSend($channel,$message);
-				if($channel == $this->highviber_public_channel)
+				if($channel == $this->config["highviber"]["public_channel"])
 				{
-					$this->discordQueue($this->discord_relay_channel,"**R2D2** $message");
+					$this->discordQueue($this->config["discord"]["relay_channel"],"**R2D2** $message");
 				}
 		}
 	}
@@ -484,7 +444,7 @@ class Worker Extends Base
 	        $curl = curl_init();
 	        curl_setopt($curl, CURLOPT_HTTP_VERSION, 3);
 	        curl_setopt($curl, CURLOPT_URL, $url);
-        	curl_setopt($curl, CURLOPT_HTTPHEADER, $this->highviber_chat_headers);
+        	curl_setopt($curl, CURLOPT_HTTPHEADER, $this->config["highviber"]["chat_headers"]);
 	        curl_setopt($curl, CURLINFO_HEADER_OUT, true);
 	        curl_setopt($curl, CURLOPT_POST, 1);
 	        curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
@@ -532,7 +492,7 @@ class DiscordClient Extends Base
 		$loop = Factory::create();
 		$discord = new Discord([
 		        "loop" => $loop,
-		        "token" => $this->discord_webhooks["bot_token"],
+		        "token" => $this->config["discord"]["bot_token"],
 		        'logger' => new \Monolog\Logger('DiscordPHP', [new StreamHandler('php://stdout', \MonoLog\Logger::ERROR)])
 		]);
 		$discord->on("ready", function (Discord $discord) {
@@ -696,7 +656,7 @@ class HighViberClient Extends Base
 
 	        $curl = curl_init();
 	        curl_setopt($curl, CURLOPT_URL, $host . $request);
-	        curl_setopt($curl, CURLOPT_HTTPHEADER, $this->highviber_push_headers);
+	        curl_setopt($curl, CURLOPT_HTTPHEADER, $this->config["highviber"]["push_headers"]);
 	        curl_setopt($curl, CURLOPT_POST, 1);
 	        curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
 	        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 60);

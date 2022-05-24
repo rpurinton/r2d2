@@ -1,12 +1,13 @@
 <?php
 
+// Hidden Function
 $funcs[] = function ($data)
 {
 	extract($data);
-	if($channel != $this->highviber_public_channel && $cmd == "!say" && $vars != "")
+	if($channel != $this->config["highviber"]["public_channel"] && $cmd == "!say" && $vars != "")
         {
 		$data["platform"] = "highviber";
-		$data["channel"] = $this->highviber_public_channel;
+		$data["channel"] = $this->config["highviber"]["public_channel"];
 		$this->sendReply($data,$vars);
 	}
 };

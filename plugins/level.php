@@ -15,7 +15,7 @@ $html_help[$cmd]["seealso"][] = "seen";
 $funcs[] = function ($data)
 {
 	extract($data);
-	if($platform == "highviber" && $channel == $this->highviber_public_channel)
+	if($platform == "highviber" && $channel == $this->config["highviber"]["public_channel"])
 	{
 		$result = $this->logSql($userid, $username, $text);
 		if($result) $this->sendReply($data,firstname($username)." has earned <b>Level $result</b> &#127942;");

@@ -15,7 +15,7 @@ $funcs[] = function ($data)
 	{
 		if ($vars === "") return $this->sendReply($data, "@" . $this->firstname($username) . ": you must provide some search terms");
 		$search = urlencode($vars);
-		$requestUrl = "https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=$search&maxResults=1&key=".$this->youtube_apikey;
+		$requestUrl = "https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=$search&maxResults=1&key=".$this->config["youtube"]["api_key"];
 
 		$result = file_get_contents($requestUrl);
 		$result = json_decode($result, true);
@@ -54,7 +54,7 @@ $funcs[] = function ($data)
 	}
 	if (isset($videoID))
 	{
-		$requestUrl = "https://www.googleapis.com/youtube/v3/videos?id=$videoID&key=".$this->youtube_apikey."&part=snippet,contentDetails,statistics,status";
+		$requestUrl = "https://www.googleapis.com/youtube/v3/videos?id=$videoID&key=".$this->config["youtube"]["api_key"]."&part=snippet,contentDetails,statistics,status";
 
 		$result = file_get_contents($requestUrl);
 		$result = json_decode($result, true);
@@ -84,7 +84,7 @@ $funcs[] = function ($data)
 	{
 		global $ytapikey;
 		$channelId = 'UC48MclMZIY_EaOQwatzCpvw';
-		$requestUrl = "https://www.googleapis.com/youtube/v3/search?key=".$this->youtube_apikey."&channelId=$channelId&part=snippet,id&maxResults=1&order=date";
+		$requestUrl = "https://www.googleapis.com/youtube/v3/search?key=".$this->config["youtube"]["api_key"]."&channelId=$channelId&part=snippet,id&maxResults=1&order=date";
 
 		$result = file_get_contents($requestUrl);
 		$result = json_decode($result, true);

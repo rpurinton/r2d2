@@ -16,7 +16,7 @@ $funcs[] = function ($data)
 		$request = "/natal.php";
 		$host = "https://astro.cafeastrology.com";
 
-		$outHeaders = $this->highviber_push_headers;
+		$outHeaders = $this->config["highviber"]["push_headers"];
 		$outHeaders[3] = "Accept-Encoding: gzip";
 		$outHeaders[4] = "Referer: $host$request";
 		unset($outHeaders[21]);
