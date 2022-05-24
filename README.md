@@ -13,10 +13,10 @@ This bot requires several files which are not provided and will NOT run for you.
 
 ## History
 
-####April 2022
+###April 2022
 - This bot was originally created for the HighViber (Mighty Networks) app.  
 
-####May 2022 
+###May 2022 
 - Simultaneous Discord support added
 - Rewritten into Classes
 - JSON config files
@@ -36,8 +36,8 @@ Help and command documentation is available at [r2d2bot.tk](https://r2d2bot.tk).
 
 ## Installation
 
-`git clone git@github.com:rpurinton/r2d2.git
-ln -s r2d2/r2d2 /usr/bin/r2d2`
+`git clone git@github.com:rpurinton/r2d2.git`
+`ln -s r2d2/r2d2 /usr/bin/r2d2`
 
 ## Starting
 
