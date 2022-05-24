@@ -1,0 +1,23 @@
+#!/usr/local/bin/php -f
+<?php
+
+if(!isset($argv[1])) die("Usage: r2d2 <start | status | reload | restart | stop>\n");
+
+require_once("R2D2.php");
+
+switch(strtolower($argv[1]))
+{
+	case "start": $class = new R2D2\Start; break;
+	case "status": $class = new R2D2\Status; break;
+	case "reload": $class = new R2D2\Reload; break;
+	case "restart": $class = new R2D2\Restart; break;
+	case "stop": $class = new R2D2\Stop; break;
+	case "logger": $class = new R2D2\Logger; break;
+	case "wrapper": $class = new R2D2\Wrapper; break;
+	case "main": $class = new R2D2\Main; break;
+	case "highviber": $class = new R2D2\HighViberClient; break;
+	case "highviber": $class = new R2D2\HighViberClient; break;
+	case "discord": $class = new R2D2\DiscordClient; break;
+	case "discordsend": $class = new R2D2\DiscordSender; break;
+	default: die("Error: Invalid Command\n");
+}

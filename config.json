@@ -1,0 +1,27 @@
+{
+    "sql": {
+        "host": "127.0.0.1",
+        "user": "r2d2",
+        "pass": "r2d2"
+    },
+    "rabbit": {
+        "host": "127.0.0.1",
+        "port": "5672",
+        "user": "rabbit",
+        "pass": "rabbit"
+    },
+    "youtube": {
+        "apikey_file": "private\/youtube_apikey.txt"
+    },
+    "discord": {
+        "log_channel": "974113550983364628",
+        "relay_channel": "976233852685131786",
+        "webhooks_file": "private\/discord_webhooks.json"
+    },
+    "highviber": {
+        "public_channel": "4619306",
+        "csrf_file": "private\/highviber_csrf.txt",
+        "push_file": "private\/highviber_push_headers.txt",
+        "chat_file": "private\/highviber_chat_headers.txt"
+    }
+}
