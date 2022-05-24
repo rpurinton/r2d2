@@ -36,8 +36,7 @@ Help and command documentation is available at [r2d2bot.tk](https://r2d2bot.tk).
 
 ## Installation
 
-`git clone git@github.com:rpurinton/r2d2.git`
-`ln -s r2d2/r2d2 /usr/bin/r2d2`
+`git clone git@github.com:rpurinton/r2d2.git && ln -s r2d2/r2d2 /usr/bin/r2d2`
 
 ## Starting
 
