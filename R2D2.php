@@ -37,7 +37,7 @@ class Base
         {
             $this->mq_chan->close();
         }
-        if ($this->mq_conn != null)
+        if ($this->mq_conn != \null)
         {
             $this->mq_conn->close();
         }
@@ -49,7 +49,7 @@ class Base
         extract($config);
         $this->mq_conn = new AMQPStreamConnection($host, $port, $user, $pass);
         $this->mq_chan = $this->mq_conn->channel();
-        $this->mq_chan->basic_qos(null, 1, null);
+        $this->mq_chan->basic_qos(\null, 1, \null);
     }
 
     protected
