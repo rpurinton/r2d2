@@ -6,6 +6,6 @@ $funcs[] = function ($data)
 	{
 		$this->discordQueue($this->config["discord"]["relay_channel"],"**$username** $text");
 		$result = $this->logSql($userid, $username, $text);
-		if($result) $this->sendReply($data,firstname($username)." has earned <b>Level $result</b> &#127942;");
+		if($result) $this->sendReply($data,$this->firstname($username)." has earned <b>Level $result</b> &#127942;");
 	}
 };

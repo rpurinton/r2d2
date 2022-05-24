@@ -156,7 +156,7 @@ class DiscordSender Extends Base
 	{
 		parent::__construct();
 		echo("Starting DiscordSender...\n");
-		$this->mq_chan->basic_consume("discord_send","discord_sender",false,false,false,false,function ($message)
+		$this->mq_chan->basic_consume("discord_send","discord_sender",false,true,false,false,function ($message)
                 {
 			$result = array(1);
                         $data = json_decode($message->body, true);
@@ -165,7 +165,6 @@ class DiscordSender Extends Base
 				$result = $this->discordSend($data["channel"],$data["message"]);
 				if(sizeof($result) > 0) usleep($result["retry_after"]*1000);
 			}
-			$message->ack();
                 });
                 $this->mq_chan->consume();
 	}
@@ -360,7 +359,7 @@ class Worker Extends Base
 		$this->sqlConnect($this->config["sql"]);
 		$this->defineLevels();
 		$this->loadPlugins();
-		$this->mq_chan->basic_consume("worker","worker$id",false,false,false,false,function ($message)
+		$this->mq_chan->basic_consume("worker","worker$id",false,true,false,false,function ($message)
 		{
 			$data = json_decode($message->body, true);
 			if($data["channel"] == "command")
@@ -378,11 +377,16 @@ class Worker Extends Base
 						$this->publish("worker",$data);
 					}
 				}
-				$message->ack();
 				return;
 			}
-			foreach($this->plugin_functions as $func) $func($data);
-			$message->ack();
+			try
+			{
+				foreach($this->plugin_functions as $func) $func($data);
+			}
+			catch(Exception $e)
+			{
+				print_r($e);
+			}
 		});
 		$this->mq_chan->consume();
 	}

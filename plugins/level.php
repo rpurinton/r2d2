@@ -18,7 +18,7 @@ $funcs[] = function ($data)
 	if($platform == "highviber" && $channel == $this->config["highviber"]["public_channel"])
 	{
 		$result = $this->logSql($userid, $username, $text);
-		if($result) $this->sendReply($data,firstname($username)." has earned <b>Level $result</b> &#127942;");
+		if($result) $this->sendReply($data,$this->firstname($username)." has earned <b>Level $result</b> &#127942;");
 	}
 	if ($cmd == "!level")
 	{
@@ -31,7 +31,7 @@ $funcs[] = function ($data)
 		{
 			extract(mysqli_fetch_assoc($result));
 			$level = $this->getLevel($message_count);
-			$togo = $this-levels_reverse[$level + 1] - $message_count;
+			$togo = $this->levels_reverse[$level + 1] - $message_count;
 			return $this->sendReply($data, $this->firstname($username) . " is level $level ($message_count messages)<br />$togo more messages to level up!");
 		}
 		$this->sendReply($data, "no users like \"$vars\" have been seen");
