@@ -192,6 +192,7 @@ class DiscordSender Extends Base
                 $result = $this->discordSend($data["channel"], $data["message"]);
                 if (\sizeof($result) > 0)
                 {
+                    $this->discordQueue($data["channel"], $data["message"]);
                     usleep($result["retry_after"] * 1000);
                 }
             }
@@ -245,7 +246,7 @@ class Logger Extends Base
 
 }
 
-class Controller
+class ProcessManager
 {
 
     protected
@@ -275,7 +276,7 @@ class Controller
 
 }
 
-class Status Extends Controller
+class Status Extends ProcessManager
 {
 
     function __construct()
@@ -297,7 +298,7 @@ class Status Extends Controller
 
 }
 
-class Start Extends Controller
+class Start Extends ProcessManager
 {
 
     function __construct()
@@ -327,7 +328,7 @@ class Wrapper
 
 }
 
-class Stop Extends Controller
+class Stop Extends ProcessManager
 {
 
     function __construct()
@@ -342,7 +343,22 @@ class Stop Extends Controller
 
 }
 
-class Restart Extends Controller
+class Kill Extends ProcessManager
+{
+
+    function __construct()
+    {
+        $pids = $this->getPids();
+        foreach ($pids as $pid)
+        {
+            posix_kill($pid, SIGKILL);
+        }
+        new Status;
+    }
+
+}
+
+class Restart Extends ProcessManager
 {
 
     function __construct()
