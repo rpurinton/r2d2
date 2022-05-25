@@ -28,7 +28,7 @@ class ProcessManager
                 break;
             case "logger":$this->reload();
                 break;
-            case default: die("ERROR: Invalid Command\n");
+            default: die("ERROR: Invalid Command\n");
         }
     }
 
