@@ -3,6 +3,7 @@
 namespace R2D2;
 
 require_once(__DIR__ . "/vendor/autoload.php");
+require_once(__DIR__ . "/src/ProcessManager.php");
 
 use Discord\Discord;
 use Amp\Websocket;
@@ -242,130 +243,6 @@ class Logger Extends Base
         $this->thread->kill();
         echo("Stopped Logger.\n");
         parent::__destruct();
-    }
-
-}
-
-class ProcessManager
-{
-
-    protected
-            function getPids()
-    {
-        $ps = array();
-        $ps2 = array();
-        $ps3 = array();
-        exec("ps aux | grep \"r2d2 wrapper\"", $ps);
-        exec("ps aux | grep \"r2d2 logger\"", $ps);
-        exec("ps aux | grep \"r2d2 main\"", $ps);
-        foreach ($ps as $line)
-        {
-            if (\strpos($line, "grep") === \false)
-            {
-                $ps2[] = $line;
-            }
-        }
-        foreach ($ps2 as $line)
-        {
-            $line = Base::myReplace("  ", " ", $line);
-            $line = explode(" ", $line);
-            $ps3[] = $line[1];
-        }
-        return $ps3;
-    }
-
-}
-
-class Status Extends ProcessManager
-{
-
-    function __construct()
-    {
-        $pids = $this->getPids();
-        if (\sizeof($pids) === 4)
-        {
-            echo("R2D2 is running... (pids " . implode(" ", $pids) . ")\n");
-        }
-        elseif (\sizeof($pids))
-        {
-            echo("WARNING; R2D2 is HALF running... (pids " . implode(" ", $pids) . ")\n");
-        }
-        else
-        {
-            echo("R2D2 is stopped.\n");
-        }
-    }
-
-}
-
-class Start Extends ProcessManager
-{
-
-    function __construct()
-    {
-        $pids = $this->getPids();
-        if (\sizeof($pids))
-        {
-            die("ERROR: R2D2 is already running.  Not starting.\n");
-        }
-        exec("nohup r2d2 wrapper </dev/null 2>&1 | r2d2 logger > /dev/null 2>&1 &");
-        new Status;
-    }
-
-}
-
-class Wrapper
-{
-
-    function __construct()
-    {
-        while (true)
-        {
-            passthru("r2d2 main");
-            sleep(1);
-        }
-    }
-
-}
-
-class Stop Extends ProcessManager
-{
-
-    function __construct()
-    {
-        $pids = $this->getPids();
-        foreach ($pids as $pid)
-        {
-            posix_kill($pid, SIGTERM);
-        }
-        new Status;
-    }
-
-}
-
-class Kill Extends ProcessManager
-{
-
-    function __construct()
-    {
-        $pids = $this->getPids();
-        foreach ($pids as $pid)
-        {
-            posix_kill($pid, SIGKILL);
-        }
-        new Status;
-    }
-
-}
-
-class Restart Extends ProcessManager
-{
-
-    function __construct()
-    {
-        new Status;
-        new Stop;
-        new Start;
     }
 
 }

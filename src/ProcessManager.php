@@ -5,9 +5,12 @@ namespace R2D2;
 class ProcessManager
 {
 
-    protected
-            function __construct($command)
+    function __construct($command = "")
     {
+        if($command === "")
+	{
+            return;
+        }
         switch($command)
         {
             case "status":$this->status();
@@ -20,13 +23,13 @@ class ProcessManager
                 break;
             case "kill":$this->kill();
                 break;
-            case "reload":$this->reload();
+            case "wrapper":$this->wrapper();
                 break;
-            case "wrapper":$this->reload();
+            case "reload": new Reload;
                 break;
-            case "main":$this->reload();
+            case "main": new Main;
                 break;
-            case "logger":$this->reload();
+            case "logger": new Logger;
                 break;
             default: die("ERROR: Invalid Command\n");
         }
@@ -115,6 +118,16 @@ class ProcessManager
         $this->status();
         $this->stop();
         $this->start();
+    }
+
+    protected
+            function wrapper()
+    {
+        while (true)
+        {
+            passthru("r2d2 main");
+            sleep(1);
+        }
     }
 
 }
