@@ -2,6 +2,10 @@
 
 namespace R2D2;
 
+require_once(__DIR__."/CommonFunctions.php");
+require_once(__DIR__."/Logger.php");
+require_once(__DIR__."/Main.php");
+
 class ProcessManager
 {
 
@@ -53,7 +57,7 @@ class ProcessManager
         }
         foreach ($ps2 as $line)
         {
-            $line = Base::myReplace("  ", " ", $line);
+            $line = CommonFunctions::myReplace("  ", " ", $line);
             $line = explode(" ", $line);
             $ps3[] = $line[1];
         }

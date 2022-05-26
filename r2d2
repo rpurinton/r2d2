@@ -6,6 +6,6 @@ if (!isset($argv[1]))
     die("Usage: r2d2 <start | status | reload | restart | stop | kill>\n");
 }
 
-require_once("R2D2.php");
+require_once(__DIR__."/src/ProcessManager.php");
 
 new R2D2\ProcessManager($argv[1]);
