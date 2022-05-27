@@ -2,9 +2,8 @@
 
 namespace R2D2;
 
-require_once(__DIR__."/CommonFunctions.php");
-
-class Worker Extends CommonFunctions
+require_once(__DIR__."/DiscordFunctions.php");
+class Worker Extends DiscordFunctions
 {
 
     protected
@@ -40,6 +39,7 @@ class Worker Extends CommonFunctions
                     if ($data["worker_id"] == $this->worker_id)
                     {
                         echo("Reloading Worker {$this->worker_id}...\n");
+			$this->loadConfig();
                         $this->loadPlugins();
                     }
                     else
@@ -178,7 +178,7 @@ class Worker Extends CommonFunctions
     protected
             function loadPlugins()
     {
-        exec("ls " . __DIR__ . "/../plugins/*.php", $modules);
+        exec("ls " . __DIR__ . "/plugins.d/*.php", $modules);
         foreach ($modules as $module)
         {
             include($module);

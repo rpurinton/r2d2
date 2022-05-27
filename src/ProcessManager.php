@@ -2,7 +2,6 @@
 
 namespace R2D2;
 
-require_once(__DIR__."/CommonFunctions.php");
 require_once(__DIR__."/Logger.php");
 require_once(__DIR__."/Main.php");
 require_once(__DIR__."/Reload.php");

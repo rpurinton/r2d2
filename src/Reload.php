@@ -2,9 +2,9 @@
 
 namespace R2D2;
 
-require_once(__DIR__ . "/CommonFunctions.php");
+require_once(__DIR__ . "/RabbitClient.php");
 
-class Reload Extends CommonFunctions
+class Reload Extends RabbitClient
 {
 
     function __construct()

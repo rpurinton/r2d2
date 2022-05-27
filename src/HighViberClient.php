@@ -2,9 +2,8 @@
 
 namespace R2D2;
 
-require_once(__DIR__."/CommonFunctions.php");
-
-class HighViberClient Extends CommonFunctions
+require_once(__DIR__."/RabbitClient.php");
+class HighViberClient Extends RabbitClient
 {
 
     protected
@@ -155,12 +154,6 @@ class HighViberClient Extends CommonFunctions
         $result2 = gzdecode($result1);
         $result3 = json_decode($result2, true);
         return($result3);
-    }
-
-    function __destruct()
-    {
-        echo("Stopped HighViberClient.\n");
-        parent::__destruct();
     }
 
 }

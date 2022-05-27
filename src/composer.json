@@ -1,0 +1,7 @@
+{
+    "require": {
+        "team-reflex/discord-php": "^7.0",
+        "php-amqplib/php-amqplib": "^3.2",
+        "amphp/websocket-client": "^1.0"
+    }
+}

@@ -2,16 +2,15 @@
 
 namespace R2D2;
 
-require_once(__DIR__ . "/../vendor/autoload.php");
-
 use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-class RabbitClient
+require_once(__DIR__ . "/vendor/autoload.php");
+require_once(__DIR__ . "/CommonFunctions.php");
+
+class RabbitClient Extends CommonFunctions
 {
 
-    protected
-            $config;
     protected
             $mq_conn;
     protected
@@ -19,7 +18,7 @@ class RabbitClient
 
     function __construct()
     {
-        $this->config = json_decode(file_get_contents(__DIR__ . "/../config.json"), true);
+	parent::__construct();
         $this->rabbitConnect($this->config["rabbit"]);
     }
 

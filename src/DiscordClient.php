@@ -2,13 +2,12 @@
 
 namespace R2D2;
 
-require_once(__DIR__ . "/CommonFunctions.php");
-
 use Discord\Discord;
 use React\EventLoop\Factory;
 use Monolog\Handler\StreamHandler;
 
-class DiscordClient Extends CommonFunctions
+require_once(__DIR__ . "/DiscordFunctions.php");
+class DiscordClient Extends DiscordFunctions
 {
 
     function __construct()

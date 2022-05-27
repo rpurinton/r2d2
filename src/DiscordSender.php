@@ -2,9 +2,8 @@
 
 namespace R2D2;
 
-require_once(__DIR__."/CommonFunctions.php");
-
-class DiscordSender Extends CommonFunctions
+require_once(__DIR__."/DiscordFunctions.php");
+class DiscordSender Extends DiscordFunctions
 {
 
     function __construct()
