@@ -7,6 +7,7 @@ use React\EventLoop\Factory;
 use Monolog\Handler\StreamHandler;
 
 require_once(__DIR__ . "/DiscordFunctions.php");
+
 class DiscordClient Extends DiscordFunctions
 {
 

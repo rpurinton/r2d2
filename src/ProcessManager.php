@@ -2,20 +2,20 @@
 
 namespace R2D2;
 
-require_once(__DIR__."/Logger.php");
-require_once(__DIR__."/Main.php");
-require_once(__DIR__."/Reload.php");
+require_once(__DIR__ . "/Logger.php");
+require_once(__DIR__ . "/Main.php");
+require_once(__DIR__ . "/Reload.php");
 
 class ProcessManager
 {
 
     function __construct($command = "")
     {
-        if($command === "")
-	{
+        if ($command === "")
+        {
             return;
         }
-        switch($command)
+        switch ($command)
         {
             case "status":$this->status();
                 break;

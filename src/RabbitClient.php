@@ -18,7 +18,7 @@ class RabbitClient Extends CommonFunctions
 
     function __construct()
     {
-	parent::__construct();
+        parent::__construct();
         $this->rabbitConnect($this->config["rabbit"]);
     }
 
@@ -49,5 +49,5 @@ class RabbitClient Extends CommonFunctions
         $message = new AMQPMessage(json_encode($data));
         $this->mq_chan->basic_publish($message, '', $queue);
     }
-}
 
+}

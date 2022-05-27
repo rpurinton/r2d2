@@ -2,10 +2,11 @@
 
 namespace R2D2;
 
-require_once(__DIR__."/RabbitClient.php");
+require_once(__DIR__ . "/RabbitClient.php");
 
 class DiscordFunctions Extends RabbitClient
 {
+
     protected
             function discordQueue($channel, $message)
     {
@@ -75,4 +76,3 @@ class DiscordFunctions Extends RabbitClient
     }
 
 }
-

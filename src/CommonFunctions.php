@@ -17,12 +17,12 @@ class CommonFunctions
             function loadConfig()
     {
         $this->config = array();
-        exec("ls ".__DIR__."/conf.d/*.conf",$jsons);
-        foreach($jsons as $json)
+        exec("ls " . __DIR__ . "/conf.d/*.conf", $jsons);
+        foreach ($jsons as $json)
         {
-            $section = substr($json,0,strpos($json,".conf"));
-            $section = substr($section,strpos($section,"conf.d/")+7);
-            $this->config[$section] = json_decode(file_get_contents($json),true);
+            $section = substr($json, 0, strpos($json, ".conf"));
+            $section = substr($section, strpos($section, "conf.d/") + 7);
+            $this->config[$section] = json_decode(file_get_contents($json), true);
         }
     }
 

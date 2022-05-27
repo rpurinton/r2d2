@@ -2,7 +2,8 @@
 
 namespace R2D2;
 
-require_once(__DIR__."/DiscordFunctions.php");
+require_once(__DIR__ . "/DiscordFunctions.php");
+
 class Worker Extends DiscordFunctions
 {
 
@@ -39,7 +40,7 @@ class Worker Extends DiscordFunctions
                     if ($data["worker_id"] == $this->worker_id)
                     {
                         echo("Reloading Worker {$this->worker_id}...\n");
-			$this->loadConfig();
+                        $this->loadConfig();
                         $this->loadPlugins();
                     }
                     else
@@ -189,4 +190,3 @@ class Worker Extends DiscordFunctions
     }
 
 }
-

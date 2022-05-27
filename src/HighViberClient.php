@@ -2,7 +2,8 @@
 
 namespace R2D2;
 
-require_once(__DIR__."/RabbitClient.php");
+require_once(__DIR__ . "/RabbitClient.php");
+
 class HighViberClient Extends RabbitClient
 {
 

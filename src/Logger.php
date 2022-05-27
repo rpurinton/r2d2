@@ -42,4 +42,3 @@ class Logger Extends DiscordFunctions
     }
 
 }
-

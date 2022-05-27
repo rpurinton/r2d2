@@ -18,4 +18,3 @@ class Reload Extends RabbitClient
     }
 
 }
-
