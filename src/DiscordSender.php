@@ -20,8 +20,14 @@ class DiscordSender Extends DiscordFunctions
                 $result = $this->discordSend($data["channel"], $data["message"]);
                 if (\sizeof($result) > 0)
                 {
-                    $this->discordQueue($data["channel"], $data["message"]);
-                    usleep($result["retry_after"] * 1000);
+                    if(isset($result["retry_after"]))
+                    {
+                         usleep($result["retry_after"] * 1000);
+                    }
+                    else
+                    {
+                        $result = array();
+                    }
                 }
             }
         });

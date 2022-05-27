@@ -10,7 +10,10 @@ class DiscordFunctions Extends RabbitClient
     protected
             function discordQueue($channel, $message)
     {
-        $this->publish("discord_send", ["channel" => $channel, "message" => $message]);
+        if($channel != "" && $message != "")
+        {
+            $this->publish("discord_send", ["channel" => $channel, "message" => $message]);
+        }
     }
 
     protected
