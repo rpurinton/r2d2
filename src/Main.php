@@ -17,7 +17,6 @@ class Main
     function __construct()
     {
         $this->nproc = exec("nproc");
-        echo("Starting Main...\n");
         for ($id = 1; $id <= $this->nproc; $id++)
         {
             $this->functions["worker$id"] = function ($workerid)
@@ -58,7 +57,6 @@ class Main
         {
             $thread->kill();
         }
-        echo("Stopped Main.\n");
     }
 
 }
