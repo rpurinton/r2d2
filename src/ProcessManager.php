@@ -1,6 +1,6 @@
 <?php
 
-namespace R2D2;
+namespace rpurinton\r2d2;
 
 require_once(__DIR__ . "/Logger.php");
 require_once(__DIR__ . "/Main.php");
@@ -70,15 +70,15 @@ class ProcessManager
         $pids = $this->getPids();
         if (\sizeof($pids) === 4)
         {
-            echo("R2D2 is running... (pids " . implode(" ", $pids) . ")\n");
+            echo("r2d2 is running... (pids " . implode(" ", $pids) . ")\n");
         }
         elseif (\sizeof($pids))
         {
-            echo("WARNING; R2D2 is HALF running... (pids " . implode(" ", $pids) . ")\n");
+            echo("WARNING; r2d2 is HALF running... (pids " . implode(" ", $pids) . ")\n");
         }
         else
         {
-            echo("R2D2 is stopped.\n");
+            echo("r2d2 is stopped.\n");
         }
     }
 
@@ -88,7 +88,7 @@ class ProcessManager
         $pids = $this->getPids();
         if (\sizeof($pids))
         {
-            die("ERROR: R2D2 is already running.  Not starting.\n");
+            die("ERROR: r2d2 is already running.  Not starting.\n");
         }
         exec("nohup r2d2 wrapper </dev/null 2>&1 | r2d2 logger > /dev/null 2>&1 &");
         $this->status();

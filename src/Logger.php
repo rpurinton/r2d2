@@ -1,6 +1,6 @@
 <?php
 
-namespace R2D2;
+namespace rpurinton\r2d2;
 
 require_once(__DIR__ . "/DiscordFunctions.php");
 
@@ -15,7 +15,6 @@ class Logger Extends DiscordFunctions
     function __construct()
     {
         parent::__construct();
-        echo("Started Logger...\n");
         $this->thread = new \parallel\Runtime(__DIR__ . "/DiscordSender.php");
         $this->future = $this->thread->run(function ()
         {
@@ -37,7 +36,6 @@ class Logger Extends DiscordFunctions
     function __destruct()
     {
         $this->thread->kill();
-        echo("Stopped Logger.\n");
         parent::__destruct();
     }
 

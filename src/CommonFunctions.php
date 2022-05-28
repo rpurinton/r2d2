@@ -1,6 +1,6 @@
 <?php
 
-namespace R2D2;
+namespace rpurinton\r2d2;
 
 class CommonFunctions
 {

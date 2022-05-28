@@ -1,6 +1,6 @@
 <?php
 
-namespace R2D2;
+namespace rpurinton\r2d2;
 
 require_once(__DIR__ . "/RabbitClient.php");
 
