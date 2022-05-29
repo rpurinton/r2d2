@@ -18,14 +18,20 @@ class Worker Extends DiscordFunctions
     protected
             $worker_id;
     protected
+            $start_time;
+    protected
+            $reload_time;
+    protected
             $levels_reverse;
     protected
             $plugin_functions;
+
 
     function __construct($id)
     {
         parent::__construct();
         echo("Starting Worker $id...\n");
+        $this->start_time = time();
         $this->worker_id = $id;
         $this->sqlConnect($this->config["sql"]);
         $this->defineLevels();
@@ -187,6 +193,7 @@ class Worker Extends DiscordFunctions
         {
             include($module);
         }
+        $this->reload_time = time();
         $this->cmd_list = $cmd_list;
         $this->html_help = $html_help;
         $this->plugin_functions = $funcs;
