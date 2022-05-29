@@ -32,7 +32,7 @@
         <table>
             <tr><th class="tdmin">Command(s)</th><th>Description / Usage</th></tr>
             <?php
-            exec("ls ../src/plugins.d/*.php", $plugins);
+            exec("ls ../plugins.d/*.php", $plugins);
             foreach ($plugins as $plugin)
             {
                 require_once($plugin);
