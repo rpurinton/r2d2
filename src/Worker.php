@@ -40,6 +40,7 @@ class Worker Extends DiscordFunctions
             $data = json_decode($message->body, true);
             if ($data["channel"] == "command")
             {
+                if (!isset($data["command"])) return;
                 if ($data["command"] == "reload")
                 {
                     if ($data["worker_id"] == $this->worker_id)
