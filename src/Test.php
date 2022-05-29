@@ -15,7 +15,7 @@ class Test Extends DiscordFunctions
     function __construct()
     {
         parent::__construct();
-        echo("r2d2 Test mode... use ^C or type exit to quit...\n>");
+        echo("r2d2 Test mode... use ^C or type exit to quit...\nr2d2>");
         $this->thread = new \parallel\Runtime(__DIR__ . "/TestSender.php");
         $this->future = $this->thread->run(function ()
         {
@@ -28,7 +28,7 @@ class Test Extends DiscordFunctions
                 $this->thread->kill();
                 exit(0);
             }
-            echo(">");
+            echo("r2d2>");
             $packet["platform"] = "test";
             $packet["channel"] = "console";
             $packet["userid"] = "101";

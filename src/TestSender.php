@@ -13,7 +13,7 @@ class TestSender Extends DiscordFunctions
         $this->mq_chan->basic_consume("test_send", "test_sender", false, true, false, false, function ($message)
         {
             $data = json_decode($message->body, true);
-            echo("\r" . $data["response"] . "\n>");
+            echo("\r" . $data["response"] . "\nr2d2>");
         });
         $this->mq_chan->consume();
     }
