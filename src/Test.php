@@ -15,7 +15,7 @@ class Test Extends DiscordFunctions
     function __construct()
     {
         parent::__construct();
-	echo("r2d2 Test mode... use ^C or type exit to quit...\n>");
+        echo("r2d2 Test mode... use ^C or type exit to quit...\n>");
         $this->thread = new \parallel\Runtime(__DIR__ . "/TestSender.php");
         $this->future = $this->thread->run(function ()
         {
@@ -23,7 +23,7 @@ class Test Extends DiscordFunctions
         });
         while ($line = trim(fgets(STDIN)))
         {
-            if($line == "exit" || $line == "quit")
+            if ($line == "exit" || $line == "quit")
             {
                 $this->thread->kill();
                 exit(0);

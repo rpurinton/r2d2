@@ -26,7 +26,6 @@ class Worker Extends DiscordFunctions
     protected
             $plugin_functions;
 
-
     function __construct($id)
     {
         parent::__construct();
@@ -114,7 +113,7 @@ class Worker Extends DiscordFunctions
         switch ($platform)
         {
             case "test":
-                $this->testQueue($data,$message);
+                $this->testQueue($data, $message);
                 break;
             case "discord":
                 $this->discordQueue($channel, $message);

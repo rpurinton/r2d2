@@ -19,9 +19,9 @@ class DiscordSender Extends DiscordFunctions
                 $result = $this->discordSend($data["channel"], $data["message"]);
                 if (\sizeof($result) > 0)
                 {
-                    if(isset($result["retry_after"]))
+                    if (isset($result["retry_after"]))
                     {
-                         usleep($result["retry_after"] * 1000);
+                        usleep($result["retry_after"] * 1000);
                     }
                     else
                     {
@@ -32,4 +32,5 @@ class DiscordSender Extends DiscordFunctions
         });
         $this->mq_chan->consume();
     }
+
 }

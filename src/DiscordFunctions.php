@@ -17,17 +17,17 @@ class DiscordFunctions Extends RabbitClient
     protected
             function testClean($message)
     {
-        $message = $this->myReplace("<br />","\n",$message);
-        $message = $this->myReplace("<br>","\n",$message);
-	$message = html_entity_decode($message);
-	$message = strip_tags($message);
-	return $message;
+        $message = $this->myReplace("<br />", "\n", $message);
+        $message = $this->myReplace("<br>", "\n", $message);
+        $message = html_entity_decode($message);
+        $message = strip_tags($message);
+        return $message;
     }
 
     protected
             function discordQueue($channel, $message)
     {
-        if($channel != "" && $message != "")
+        if ($channel != "" && $message != "")
         {
             $this->publish("discord_send", ["channel" => $channel, "message" => $message]);
         }
