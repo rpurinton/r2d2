@@ -23,9 +23,9 @@ $funcs[] = function ($data)
             return $days . "d " . $hours . "h " . $mins . "m";
         };
         $system_time = explode(" ", file_get_contents("/proc/uptime"))[0];
-        $message = "<pre>OS      " . $timehuman($system_time);
-        $message .= "<br />Bot     " . $timehuman(time() - $this->start_time);
-        $message .= "<br />Plugins " . $timehuman(time() - $this->reload_time) . "</pre>";
+        $message = "<pre>linux booted " . $timehuman($system_time)." ago";
+        $message .= "<br />bot started " . $timehuman(time() - $this->start_time)." ago";
+        $message .= "<br />plugins loaded " . $timehuman(time() - $this->reload_time) . " ago</pre>";
         $this->sendReply($data, $message);
     }
 };
