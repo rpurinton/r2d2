@@ -8,6 +8,23 @@ class DiscordFunctions Extends RabbitClient
 {
 
     protected
+            function testQueue($data, $message)
+    {
+        $data["response"] = $this->testClean($message);
+        $this->publish("test_send", $data);
+    }
+
+    protected
+            function testClean($message)
+    {
+        $message = $this->myReplace("<br />","\n",$message);
+        $message = $this->myReplace("<br>","\n",$message);
+	$message = html_entity_decode($message);
+	$message = strip_tags($message);
+	return $message;
+    }
+
+    protected
             function discordQueue($channel, $message)
     {
         if($channel != "" && $message != "")
