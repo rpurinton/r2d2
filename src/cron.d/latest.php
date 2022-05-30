@@ -16,7 +16,7 @@ $videoTitle = $result2['items'][0]['snippet']['title'];
 
 if (!file_exists(__DIR__."/tmp/latest/$videoID"))
 {
-	touch("/tmp/latest/$videoID");
+	touch(__DIR__."/tmp/latest/$videoID");
 	$message = "<a href=\"https://youtu.be/$videoID\" target=\"_blank\">https://youtu.be/$videoID</a><br />Aaron Doughty just posted a new video!<br />$videoTitle";
 	$data["platform"] = "highviber";
 	$data["channel"] = $worker->config["highviber"]["public_channel"];
