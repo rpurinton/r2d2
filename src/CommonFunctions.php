@@ -5,7 +5,7 @@ namespace rpurinton\r2d2;
 class CommonFunctions
 {
 
-    protected
+    public
             $config = array();
 
     function __construct()
