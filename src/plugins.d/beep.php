@@ -45,7 +45,7 @@ $funcs[] = function ($data)
             }
             return $sentence;
         };
-        $this->sendReply($data, $makeBeep());
+        $this->reply($data, $makeBeep());
     }
 };
 
@@ -89,6 +89,6 @@ $funcs[] = function ($data)
             }
             return $sentence;
         };
-        $this->sendReply($data, $makeBeep());
+        $this->reply($data, $makeBeep());
     }
 };

@@ -11,7 +11,7 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd == "!soc")
     {
-        $this->sendReply($data, " <b>The Scale of Consciousness</b><br /><pre>
+        $this->reply($data, " <b>The Scale of Consciousness</b><br /><pre>
    | 700+ Enlightenment | E 
  L | 600  Peace         | X 
  O | 540  Joy           | P 

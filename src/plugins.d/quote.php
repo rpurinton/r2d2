@@ -14,7 +14,7 @@ $funcs[] = function ($data)
     if ($cmd == "!quote")
     {
         extract(json_decode(file_get_contents("https://api.quot.tk"), true));
-        $this->sendReply($data, "<i>\"$quote #$subject\"</i> - <b>$author</b>");
+        $this->reply($data, "<i>\"$quote #$subject\"</i> - <b>$author</b>");
     }
 };
 
@@ -33,6 +33,6 @@ $funcs[] = function ($data)
     if ($cmd == "!love")
     {
         extract(json_decode(file_get_contents("https://api.quot.tk?subject=love"), true));
-        $this->sendReply($data, "<i>\"$quote #$subject\"</i> - <b>$author</b>");
+        $this->reply($data, "<i>\"$quote #$subject\"</i> - <b>$author</b>");
     }
 };

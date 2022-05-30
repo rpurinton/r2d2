@@ -18,7 +18,7 @@ $funcs[] = function ($data)
     if ($platform == "highviber" && $channel == $this->config["highviber"]["public_channel"])
     {
         $result = $this->logSql($userid, $username, $text);
-        if ($result) $this->sendReply($data, $this->firstname($username) . " has earned <b>Level $result</b> &#127942;");
+        if ($result) $this->reply($data, $this->firstname($username) . " has earned <b>Level $result</b> &#127942;");
     }
     if ($cmd == "!level")
     {
@@ -32,9 +32,9 @@ $funcs[] = function ($data)
             extract(mysqli_fetch_assoc($result));
             $level = $this->getLevel($message_count);
             $togo = $this->levels_reverse[$level + 1] - $message_count;
-            return $this->sendReply($data, $this->firstname($username) . " is level $level ($message_count messages)<br />$togo more messages to level up!");
+            return $this->reply($data, $this->firstname($username) . " is level $level ($message_count messages)<br />$togo more messages to level up!");
         }
-        $this->sendReply($data, "no users like \"$vars\" have been seen");
+        $this->reply($data, "no users like \"$vars\" have been seen");
     }
 };
 
@@ -57,7 +57,7 @@ $funcs[] = function ($data)
         {
             $result .= "Level $i: " . number_format($this->levels_reverse[$i], 0, ".", ",") . " msgs\r\n";
         }
-        $this->sendReply($data, $result . "</pre>");
+        $this->reply($data, $result . "</pre>");
     }
 };
 
@@ -94,6 +94,6 @@ $funcs[] = function ($data)
             $first = substr($first, 0, 10);
             $results .= "$first - lvl " . $this->getLevel($message_count) . " ($message_count)<br />";
         }
-        $this->sendReply($data, $results . "---- since April 30, 2022 ----</pre>");
+        $this->reply($data, $results . "---- since April 30, 2022 ----</pre>");
     }
 };

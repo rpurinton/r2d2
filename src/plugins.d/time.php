@@ -28,6 +28,6 @@ $funcs[] = function ($data)
             $message .= date("D h:i A", $timestamp) . " $value\r\n";
         }
         date_default_timezone_set("UTC");
-        $this->sendReply($data, $message . "</pre>");
+        $this->reply($data, $message . "</pre>");
     }
 };

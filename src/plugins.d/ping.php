@@ -12,6 +12,6 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd === "!ping")
     {
-        $this->sendReply($data, "POOOONNNNNGGGGGG!");
+        $this->reply($data, "POOOONNNNNGGGGGG!");
     }
 };

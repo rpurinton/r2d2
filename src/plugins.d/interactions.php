@@ -52,7 +52,7 @@ $funcs[] = function ($data)
         $hello[] = "Look at what the cat dragged in!";
         $hello[] = "Good day $first, how are you today?";
         $hello[] = "Speak of the devil...";
-        $this->sendReply($data, $hello[array_rand($hello)]);
+        $this->reply($data, $hello[array_rand($hello)]);
     }
 };
 
@@ -95,7 +95,7 @@ $funcs[] = function ($data)
         $goodnight[] = "If you need me $first, you know where to find me.";
         $goodnight[] = "Goodnight, $first!";
         $goodnight[] = "Can’t wait to wake up next to you $first!";
-        $this->sendReply($data, $goodnight[array_rand($goodnight)]);
+        $this->reply($data, $goodnight[array_rand($goodnight)]);
     }
 };
 
@@ -104,7 +104,7 @@ $funcs[] = function ($data)
     extract($data);
     if (strpos(strtolower($text), "jinx") !== false)
     {
-        $this->sendReply($data, $text);
+        $this->reply($data, $text);
     }
 };
 
@@ -120,18 +120,18 @@ $funcs[] = function ($data)
         $response[] = "crickets...";
 
         unlink(__DIR__ . "/tmp/knockknock2/$userid");
-        return $this->sendReply($data, $response[array_rand($response)]);
+        return $this->reply($data, $response[array_rand($response)]);
     }
     if (file_exists(__DIR__ . "/tmp/knockknock1/$userid"))
     {
         unlink(__DIR__ . "/tmp/knockknock1/$userid");
         touch(__DIR__ . "/tmp/knockknock2/$userid");
-        return $this->sendReply($data, "$text who?");
+        return $this->reply($data, "$text who?");
     }
     if ($cmd === "knock" && strtolower($vars) === "knock")
     {
         touch(__DIR__ . "/tmp/knockknock1/$userid");
-        return $this->sendReply($data, "Who's there?");
+        return $this->reply($data, "Who's there?");
     }
 };
 
@@ -167,6 +167,6 @@ $funcs[] = function ($data)
         $welcome[] = "@$first, glad to help!";
         $welcome[] = "@$first just happy to help!";
         $welcome[] = "@$first glad I could help!";
-        $this->sendReply($data, $welcome[array_rand($welcome)]);
+        $this->reply($data, $welcome[array_rand($welcome)]);
     }
 };

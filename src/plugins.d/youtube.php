@@ -13,7 +13,7 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd == "!youtube")
     {
-        if ($vars === "") return $this->sendReply($data, "@" . $this->firstname($username) . ": you must provide some search terms");
+        if ($vars === "") return $this->reply($data, "@" . $this->firstname($username) . ": you must provide some search terms");
         $search = urlencode($vars);
         $requestUrl = "https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&q=$search&maxResults=1&key=" . $this->config["youtube"]["api_key"];
 
@@ -22,14 +22,14 @@ $funcs[] = function ($data)
 
         if (!isset($result['items'][0]))
         {
-            return $this->sendReply($data, "Sorry " . $this->firstname($username) . ", there were no results");
+            return $this->reply($data, "Sorry " . $this->firstname($username) . ", there were no results");
         }
 
         $videoId = $result['items'][0]['id']['videoId'];
         $videoTitle = $result['items'][0]['snippet']['title'];
         $channelTitle = $result['items'][0]['snippet']['channelTitle'];
 
-        $this->sendReply($data, "<a href=\"https://youtu.be/$videoId\" target=\"_blank\">https://youtu.be/$videoId</a><br />$videoTitle<br />by $channelTitle");
+        $this->reply($data, "<a href=\"https://youtu.be/$videoId\" target=\"_blank\">https://youtu.be/$videoId</a><br />$videoTitle<br />by $channelTitle");
     }
 };
 
@@ -64,9 +64,9 @@ $funcs[] = function ($data)
             $videoTitle = $result['items'][0]['snippet']['title'];
             $channelTitle = $result['items'][0]['snippet']['channelTitle'];
             $duration = strtolower(substr($result['items'][0]['contentDetails']['duration'], 2));
-            return $this->sendReply($data, $this->firstname($username) . " shared a $duration video<br /><a href=\"https://youtu.be/$videoID\" target=\"_blank\">$videoTitle</a><br />by $channelTitle");
+            return $this->reply($data, $this->firstname($username) . " shared a $duration video<br /><a href=\"https://youtu.be/$videoID\" target=\"_blank\">$videoTitle</a><br />by $channelTitle");
         }
-        return $this->sendReply($data, "404 not found");
+        return $this->reply($data, "404 not found");
     }
 };
 
@@ -92,6 +92,6 @@ $funcs[] = function ($data)
         $videoID = $result['items'][0]['id']['videoId'];
         $videoTitle = $result['items'][0]['snippet']['title'];
 
-        $this->sendReply($data, "<a href=\"https://youtu.be/$videoID\" target=\"_blank\">https://youtu.be/$videoID</a><br />Here's the latest video by Aaron Doughty<br />$videoTitle");
+        $this->reply($data, "<a href=\"https://youtu.be/$videoID\" target=\"_blank\">https://youtu.be/$videoID</a><br />Here's the latest video by Aaron Doughty<br />$videoTitle");
     }
 };

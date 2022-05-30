@@ -18,7 +18,7 @@ $funcs[] = function ($data)
         {
             $vars = $this->firstname($username);
         }
-        $this->sendReply($data, "<i>*cwtches $vars*</i> &#129303;");
+        $this->reply($data, "<i>*cwtches $vars*</i> &#129303;");
     }
 };
 
@@ -37,6 +37,6 @@ $funcs[] = function ($data)
     if ($cmd == "!slap")
     {
         if ($vars == "") $vars = $this->firstname($username);
-        $this->sendReply($data, "<i>slaps $vars around a bit with a large trout</i>");
+        $this->reply($data, "<i>slaps $vars around a bit with a large trout</i>");
     }
 };

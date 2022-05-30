@@ -242,7 +242,7 @@ $funcs[] = function ($data)
         $message .= "Positive $positives Negative $negatives<br />";
         $balance = $positives + $negatives;
         $message .= "        Balance $balance";
-        $this->sendReply($data, "<pre>$message</pre>");
+        $this->reply($data, "<pre>$message</pre>");
     }
 };
 

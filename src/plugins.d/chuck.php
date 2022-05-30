@@ -16,6 +16,6 @@ $funcs[] = function ($data)
     {
         $requestUrl = "https://api.chucknorris.io/jokes/random";
         $results = json_decode(file_get_contents($requestUrl), true);
-        $this->sendReply($data, "True Fact: " . $results["value"]);
+        $this->reply($data, "True Fact: " . $results["value"]);
     }
 };

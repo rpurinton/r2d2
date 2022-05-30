@@ -34,6 +34,6 @@ $funcs[] = function ($data)
             $runningtotal = $newtotal;
         }
         $message .= "</pre>";
-        $this->sendReply($data, $message);
+        $this->reply($data, $message);
     }
 };

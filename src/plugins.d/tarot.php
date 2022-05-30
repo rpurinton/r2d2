@@ -25,11 +25,11 @@ $funcs[] = function ($data)
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
-            return $this->sendReply($data, "Pulling a card for $first...<br />&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i>");
+            return $this->reply($data, "Pulling a card for $first...<br />&#127183;<a href=\"$revurl\" target=\"_blank\">$card in Reverse</a><br /><i>$reversed</i>");
         }
         else
         {
-            return $this->sendReply($data, "Pulling a card for $first...<br />&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i>");
+            return $this->reply($data, "Pulling a card for $first...<br />&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i>");
         }
     }
 };
@@ -99,7 +99,7 @@ $funcs[] = function ($data)
         {
             $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i>";
         }
-        $this->sendReply($data, $message);
+        $this->reply($data, $message);
     }
 };
 
@@ -171,7 +171,7 @@ $funcs[] = function ($data)
             $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
         }
 
-        $this->sendReply($data, $message);
+        $this->reply($data, $message);
     }
 };
 
@@ -244,6 +244,6 @@ $funcs[] = function ($data)
             $message .= "&#127183;<a href=\"$upurl\" target=\"_blank\">$card</a><br /><i>$upright</i><br /><br />";
         }
 
-        $this->sendReply($data, $message);
+        $this->reply($data, $message);
     }
 };

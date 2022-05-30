@@ -108,7 +108,7 @@ class Worker Extends DiscordFunctions
     }
 
     protected
-            function sendReply($data, $message)
+            function reply($data, $message)
     {
         extract($data);
         switch ($platform)

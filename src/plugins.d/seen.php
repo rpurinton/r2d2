@@ -17,7 +17,7 @@ $funcs[] = function ($data)
     {
         if ($vars == "")
         {
-            return $this->sendReply($data, "you must use !seen &lt;name&gt;");
+            return $this->reply($data, "you must use !seen &lt;name&gt;");
         }
         mysqli_select_db($this->sql, "chatbot");
         $targetnew = mysqli_real_escape_string($this->sql, $vars);
@@ -61,9 +61,9 @@ $funcs[] = function ($data)
             $lasttime = strtotime($last_time);
             $timediff = time() - $lasttime;
             $timehuman = $time_human($timediff);
-            return $this->sendReply($data, "$username was last seen $timehuman ago when they said:<br /><i>\"$last_text\"</i>");
+            return $this->reply($data, "$username was last seen $timehuman ago when they said:<br /><i>\"$last_text\"</i>");
         }
-        return $this->sendReply($data, "no users like \"$vars\" have been seen");
+        return $this->reply($data, "no users like \"$vars\" have been seen");
     }
 };
 

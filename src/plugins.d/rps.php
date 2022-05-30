@@ -26,9 +26,9 @@ $funcs[] = function ($data)
             if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
             {
                 extract($result);
-                return $this->sendReply($data, "@$first: $rock, Me: $rock, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
+                return $this->reply($data, "@$first: $rock, Me: $rock, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
             }
-            else return $this->sendReply($data, "@$first: $rock, Me: $rock, it's a tie");
+            else return $this->reply($data, "@$first: $rock, Me: $rock, it's a tie");
         }
         if ($rand === 1)
         {
@@ -36,17 +36,17 @@ $funcs[] = function ($data)
             if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
             {
                 extract($result);
-                return $this->sendReply($data, "@$first: $rock, Me: $paper, I win...<br />your personal record: W: $win L: $loss T: $tie");
+                return $this->reply($data, "@$first: $rock, Me: $paper, I win...<br />your personal record: W: $win L: $loss T: $tie");
             }
-            else return $this->sendReply($data, "@$first: $rock, Me: $paper, I win");
+            else return $this->reply($data, "@$first: $rock, Me: $paper, I win");
         }
         mysqli_query($this->sql, "UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
         if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
         {
             extract($result);
-            return $this->sendReply($data, "@$first: $rock, Me: $scissors, You win...<br />your personal record: W: $win L: $loss T: $tie");
+            return $this->reply($data, "@$first: $rock, Me: $scissors, You win...<br />your personal record: W: $win L: $loss T: $tie");
         }
-        else return $this->sendReply($data, "@$first: $rock, Me: $scissors, You win...");
+        else return $this->reply($data, "@$first: $rock, Me: $scissors, You win...");
     }
 };
 
@@ -75,9 +75,9 @@ $funcs[] = function ($data)
             if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
             {
                 extract($result);
-                return $this->sendReply($data, "@$first: $paper, Me: $paper, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
+                return $this->reply($data, "@$first: $paper, Me: $paper, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
             }
-            else return $this->sendReply($data, "@$first: $paper, Me: $paper, it's a tie");
+            else return $this->reply($data, "@$first: $paper, Me: $paper, it's a tie");
         }
         if ($rand === 1)
         {
@@ -85,17 +85,17 @@ $funcs[] = function ($data)
             if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
             {
                 extract($result);
-                return $this->sendReply($data, "@$first: $paper, Me: $scissors, I win...<br />your personal record: W: $win L: $loss T: $tie");
+                return $this->reply($data, "@$first: $paper, Me: $scissors, I win...<br />your personal record: W: $win L: $loss T: $tie");
             }
-            else return $this->sendReply($data, "@$first: $paper, Me: $scissors, I win");
+            else return $this->reply($data, "@$first: $paper, Me: $scissors, I win");
         }
         mysqli_query($this->sql, "UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
         if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
         {
             extract($result);
-            return $this->sendReply($data, "@$first: $paper, Me: $rock, You win...<br />your personal record: W: $win L: $loss T: $tie");
+            return $this->reply($data, "@$first: $paper, Me: $rock, You win...<br />your personal record: W: $win L: $loss T: $tie");
         }
-        else return $this->sendReply($data, "@$first: $paper, Me: $rock, You win...");
+        else return $this->reply($data, "@$first: $paper, Me: $rock, You win...");
     }
 };
 
@@ -125,9 +125,9 @@ $funcs[] = function ($data)
             if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
             {
                 extract($result);
-                return $this->sendReply($data, "@$first: $scissors, Me: $scissors, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
+                return $this->reply($data, "@$first: $scissors, Me: $scissors, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
             }
-            else return $this->sendReply($data, "@$first: $scissors, Me: $scissors, it's a tie");
+            else return $this->reply($data, "@$first: $scissors, Me: $scissors, it's a tie");
         }
         if ($rand === 1)
         {
@@ -135,16 +135,16 @@ $funcs[] = function ($data)
             if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
             {
                 extract($result);
-                return $this->sendReply($data, "@$first: $scissors, Me: $rock, I win...<br />your personal record: W: $win L: $loss T: $tie");
+                return $this->reply($data, "@$first: $scissors, Me: $rock, I win...<br />your personal record: W: $win L: $loss T: $tie");
             }
-            else return $this->sendReply($data, "@$first: $scissors, Me: $rock, I win");
+            else return $this->reply($data, "@$first: $scissors, Me: $rock, I win");
         }
         mysqli_query($this->sql, "UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
         if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
         {
             extract($result);
-            return $this->sendReply($data, "@$first: $scissors, Me: $paper, You win...<br />your personal record: W: $win L: $loss T: $tie");
+            return $this->reply($data, "@$first: $scissors, Me: $paper, You win...<br />your personal record: W: $win L: $loss T: $tie");
         }
-        else return $this->sendReply($data, "@$first: $scissors, Me: $paper, You win");
+        else return $this->reply($data, "@$first: $scissors, Me: $paper, You win");
     }
 };

@@ -34,8 +34,8 @@ $funcs[] = function ($data)
         {
             $message = "$vars command not found<br />Get detailed help at <a href=\"https://r2d2bot.tk\" target=\"_blank\">r2d2bot.tk</a>";
         }
-        if ($message != "") return $this->sendReply($data, $message);
-        $this->sendReply($data, "Get detailed help at <a href=\"https://r2d2bot.tk\" target=\"_blank\">r2d2bot.tk</a>");
+        if ($message != "") return $this->reply($data, $message);
+        $this->reply($data, "Get detailed help at <a href=\"https://r2d2bot.tk\" target=\"_blank\">r2d2bot.tk</a>");
     }
 };
 
@@ -57,6 +57,6 @@ $funcs[] = function ($data)
         {
             $message .= "<a href=\"https://r2d2bot.tk/#$cmd\" target=\"_blank\">$cmd</a>&nbsp;";
         }
-        $this->sendReply($data, "$message<br />Get detailed help at <a href=\"https://r2d2bot.tk\" target=\"_blank\">r2d2bot.tk</a>");
+        $this->reply($data, "$message<br />Get detailed help at <a href=\"https://r2d2bot.tk\" target=\"_blank\">r2d2bot.tk</a>");
     }
 };

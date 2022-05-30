@@ -45,7 +45,7 @@ $funcs[] = function ($data)
         $message .= "Learn Chinese: $chinese<br />";
         $message .= "Pronounced: $pronounce<br />";
         $message .= "English: $english";
-        $this->sendReply($data, $message);
+        $this->reply($data, $message);
     }
 };
 

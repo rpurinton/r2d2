@@ -26,6 +26,6 @@ $funcs[] = function ($data)
         $message = "<pre>linux booted " . $timehuman($system_time)." ago";
         $message .= "<br />bot started " . $timehuman(time() - $this->start_time)." ago";
         $message .= "<br />plugins loaded " . $timehuman(time() - $this->reload_time) . " ago</pre>";
-        $this->sendReply($data, $message);
+        $this->reply($data, $message);
     }
 };

@@ -41,7 +41,7 @@ $funcs[] = function ($data)
         $results[] = " outlook not so good &#128078;";
         $results[] = " very doubtful &#128078;";
         $first = $this->firstname($username);
-        $this->sendReply($data, "@$first &#127921; " . $results[array_rand($results)]);
+        $this->reply($data, "@$first &#127921; " . $results[array_rand($results)]);
     }
 };
 
@@ -69,9 +69,9 @@ $funcs[] = function ($data)
         $inarr = explode(" or ", $vars);
         if (sizeof($inarr) === 1)
         {
-            return $this->sendReply($data, "@$first: $vars or what?");
+            return $this->reply($data, "@$first: $vars or what?");
         }
-        $this->sendReply($data, "@$first: " . $inarr[array_rand($inarr)]);
+        $this->reply($data, "@$first: " . $inarr[array_rand($inarr)]);
     }
 };
 
@@ -97,16 +97,16 @@ $funcs[] = function ($data)
             if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'")))
             {
                 extract($result);
-                return $this->sendReply($data, "@$first: it's heads... heads: $heads tails: $tails");
+                return $this->reply($data, "@$first: it's heads... heads: $heads tails: $tails");
             }
-            else return $this->sendReply($data, "@$first: it's heads");
+            else return $this->reply($data, "@$first: it's heads");
         }
         mysqli_query($this->sql, "UPDATE `users` SET `tails` = `tails`+1 WHERE `userid` = '$userid'");
         if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'")))
         {
             extract($result);
-            return $this->sendReply($data, "@$first: it's tails... heads: $heads tails: $tails");
+            return $this->reply($data, "@$first: it's tails... heads: $heads tails: $tails");
         }
-        else return $this->sendReply($data, "@$first: it's tails");
+        else return $this->reply($data, "@$first: it's tails");
     }
 };

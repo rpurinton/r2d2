@@ -8,6 +8,6 @@ $funcs[] = function ($data)
     {
         $data["platform"] = "highviber";
         $data["channel"] = $this->config["highviber"]["public_channel"];
-        $this->sendReply($data, $vars);
+        $this->reply($data, $vars);
     }
 };

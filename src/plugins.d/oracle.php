@@ -70,7 +70,7 @@ $funcs[] = function ($data)
         extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `phases` ORDER BY RAND() LIMIT 0,1")));
         $message .= "$name - <i>$meaning</i>";
 
-        $this->sendReply($data, $message);
+        $this->reply($data, $message);
     }
 };
 

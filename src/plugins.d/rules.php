@@ -11,6 +11,6 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd === "!rules")
     {
-        $this->sendReply($data, "<a href=\"https://www.highviber.com/posts/community-guidelines\" target=\"_blank\">https://www.highviber.com/posts/community-guidelines</a>");
+        $this->reply($data, "<a href=\"https://www.highviber.com/posts/community-guidelines\" target=\"_blank\">https://www.highviber.com/posts/community-guidelines</a>");
     }
 };
