@@ -19,7 +19,7 @@ class RabbitClient Extends CommonFunctions
     function __construct()
     {
         parent::__construct();
-        $this->rabbitConnect($this->config["rabbit"]);
+        $this->rabbitConnect();
     }
 
     function __destruct()
@@ -34,16 +34,16 @@ class RabbitClient Extends CommonFunctions
         }
     }
 
-    protected
-            function rabbitConnect($config)
+    public
+            function rabbitConnect()
     {
-        extract($config);
+        extract($this->config["rabbit"]);
         $this->mq_conn = new AMQPStreamConnection($host, $port, $user, $pass);
         $this->mq_chan = $this->mq_conn->channel();
         $this->mq_chan->basic_qos(\null, 1, \null);
     }
 
-    protected
+    public
             function publish($queue, $data)
     {
         $message = new AMQPMessage(json_encode($data));
