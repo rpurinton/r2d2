@@ -2,25 +2,26 @@
 
 ## Foreward
 
-This bot requires several files which are not provided and will NOT run for you.   The code provided here is only for reference and collaboration.  You may however use any portions of the code here for your own purposes.  Any and all feedback and/or suggestions are welcome.
+This bot requires several config files with certain secrets which are not provided and will NOT run for you.   The code provided here is only for reference and collaboration.  You may however use any portions of the code here for your own purposes.  Any and all feedback and/or suggestions are welcome.
 
 ## Goals
 
 - First ever bot for the HighViber (Mighty Networks) app.  No bots existed previously. 
-- Chat commands easily added and changed using module PHP files in the modules directory.
+- Chat commands easily added and changed using plugins (additional PHP files) in the `src/plugins.d` directory.
 - RabbitMQ used to queue recieved messages for later processing by multiple workers
 - Scaleable to hundreds of servers
 
 ## History
 
 #### April 2022
-- This bot was originally created for the HighViber (Mighty Networks) app.  
+- This bot was originally created for the HighViber (Mighty Networks) app. 
 
 #### May 2022 
 - Simultaneous Discord support added
 - Rewritten into Classes
-- JSON config files
-- Multi-threading
+- JSON config file loader
+- Multi-threading (Parallel Runtimes)
+- Test Console
 
 ## Command Help
 
