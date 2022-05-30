@@ -29,18 +29,29 @@ class Worker Extends DiscordFunctions
     function __construct($id)
     {
         parent::__construct();
-        echo("Starting Worker $id...\n");
-        $this->start_time = time();
         $this->worker_id = $id;
-        $this->sqlConnect($this->config["sql"]);
+    }
+
+    function __destruct()
+    {
+	if($this->sql != \null) $this->sql->close();
+        echo("Stopped Worker {$this->worker_id}.\n");
+        parent::__destruct();
+    }
+
+    public function start()
+    {
+        $this->start_time = time();
+        echo("Starting Worker {$this->worker_id}...\n");
+        $this->sqlConnect();
         $this->defineLevels();
         $this->loadPlugins();
-        $this->mq_chan->basic_consume("worker", "worker$id", false, true, false, false, function ($message)
+        $this->mq_chan->basic_consume("worker", "worker{$this->worker_id}", false, true, false, false, function ($message)
         {
             $data = json_decode($message->body, true);
             if ($data["channel"] == "command")
             {
-                if (!isset($data["command"])) return;
+                if (!isset($data["command"]) || $data["command"] === "none") return;
                 if ($data["command"] == "reload")
                 {
                     if ($data["worker_id"] == $this->worker_id)
@@ -72,17 +83,10 @@ class Worker Extends DiscordFunctions
         $this->mq_chan->consume();
     }
 
-    function __destruct()
-    {
-        $this->sql->close();
-        echo("Stopped Worker {$this->worker_id}.\n");
-        parent::__destruct();
-    }
-
     protected
-            function sqlConnect($config)
+            function sqlConnect()
     {
-        extract($config);
+        extract($this->config["sql"]);
         $this->sql = mysqli_connect($host, $user, $pass)
                 or die("sql connection error\n");
     }
@@ -107,7 +111,7 @@ class Worker Extends DiscordFunctions
         }
     }
 
-    protected
+    public
             function reply($data, $message)
     {
         extract($data);

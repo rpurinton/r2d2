@@ -21,7 +21,8 @@ class Main
         {
             $this->functions["worker$id"] = function ($workerid)
             {
-                new Worker($workerid);
+                $worker = new Worker($workerid);
+                $worker->start();
             };
             $this->threads["worker$id"] = new \parallel\Runtime(__DIR__ . "/Worker.php");
             $this->futures["worker$id"] = $this->threads["worker$id"]->run($this->functions["worker$id"], array($id));
