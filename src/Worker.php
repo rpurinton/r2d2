@@ -35,7 +35,6 @@ class Worker Extends DiscordFunctions
     function __destruct()
     {
 	if($this->sql != \null) $this->sql->close();
-        echo("Stopped Worker {$this->worker_id}.\n");
         parent::__destruct();
     }
 
