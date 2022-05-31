@@ -61,7 +61,7 @@ $funcs[] = function ($data)
                 case "vi": return "&#9805; Virgo";
                 case "li": return "&#9806; Libra";
                 case "sc": return "&#9807; Scorpio";
-                case "sa": return "&#9808; Sagittarius";
+                case "sa": return "&#9808; Sagittari";
                 case "cp": return "&#9809; Capricorn";
                 case "aq": return "&#9810; Aquarius";
                 case "pi": return "&#9811; Pisces";
@@ -110,7 +110,7 @@ $funcs[] = function ($data)
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
 	$line01 = substr($results[$i],strpos($results[$i],"\t")+1);
-	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing).$moon_sign_emoji($next_sign)."<br />";
+	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing)." ".$moon_sign_emoji($next_sign)."<br />";
 
 	$cmd = "swetest -g -head -p1 -fZ- -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
 	$results = array();
@@ -134,7 +134,7 @@ $funcs[] = function ($data)
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
 	$line01 = substr($results[$i],strpos($results[$i],"\t")+1);
-	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing).$moon_sign_emoji($next_sign)."<br />";
+	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing)." ".$moon_sign_emoji($next_sign)."<br />";
 
 	$cmd = "swetest -g -head -p1 -fZ- -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
 	$results = array();
@@ -158,7 +158,7 @@ $funcs[] = function ($data)
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
 	$line01 = substr($results[$i],strpos($results[$i],"\t")+1);
-	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing).$moon_sign_emoji($next_sign)."<br />";
+	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing)." ".$moon_sign_emoji($next_sign)."<br />";
 
 	$cmd = "swetest -g -head -p1 -fZ- -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
 	$results = array();
@@ -182,7 +182,7 @@ $funcs[] = function ($data)
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
 	$line01 = substr($results[$i],strpos($results[$i],"\t")+1);
-	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing).$moon_sign_emoji($next_sign)."<br />";
+	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing)." ".$moon_sign_emoji($next_sign)."<br />";
 
 	$cmd = "swetest -g -head -p1 -fZ- -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
 	$results = array();
@@ -206,7 +206,7 @@ $funcs[] = function ($data)
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
 	$line01 = substr($results[$i],strpos($results[$i],"\t")+1);
-	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing).$moon_sign_emoji($next_sign)."<br />";
+	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing)." ".$moon_sign_emoji($next_sign)."<br />";
 
 	$cmd = "swetest -g -head -p1 -fZ- -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
 	$results = array();
@@ -230,7 +230,7 @@ $funcs[] = function ($data)
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
 	$line01 = substr($results[$i],strpos($results[$i],"\t")+1);
-	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing).$moon_sign_emoji($next_sign)."<br />";
+	$message .= date("M-d H:i:s",$time)." ".$moon_phase_emoji($line01,$increasing)." ".$moon_sign_emoji($next_sign)."<br />";
 	$message .= "</pre>";
 	$this->reply($data, $message);
     }
