@@ -35,18 +35,18 @@ $funcs[] = function ($data)
         {
             switch($input)
             {
-                case "ar": return "Aries &#9800;";
-                case "ta": return "Taurus &#9801;";
-                case "ge": return "Gemini &#9802;";
-                case "cn": return "Cancer &#9803;";
-                case "le": return "Leo &#9804;";
-                case "vi": return "Virgo &#9805;";
-                case "li": return "Libra &#9806;";
-                case "sc": return "Scorpio &#9807;";
-                case "sa": return "Sagittarius &#9808;";
-                case "cp": return "Capricorn &#9809;";
-                case "aq": return "Aquarius &#9810;";
-                case "pi": return "Pisces &#9811;";
+                case "ar": return "&#9800; Aries";
+                case "ta": return "&#9801; Taurus";
+                case "ge": return "&#9802; Gemini";
+                case "cn": return "&#9803; Cancer";
+                case "le": return "&#9804; Leo";
+                case "vi": return "&#9805; Virgo";
+                case "li": return "&#9806; Libra";
+                case "sc": return "&#9807; Scorpio";
+                case "sa": return "&#9808; Sagittarius";
+                case "cp": return "&#9809; Capricorn";
+                case "aq": return "&#9810; Aquarius";
+                case "pi": return "&#9811; Pisces";
             }
         };
 
@@ -69,8 +69,76 @@ $funcs[] = function ($data)
 
 	$message = $moonPhase($line01,$increasing)." <i>in</i> <b>".$moon_sign_emoji($line001)."</b><br />";
 
-	if($increasing) $message .= "<i>Illumination ".round($line01*100,0)."% and increasing</i>";
-	else $message .= "<i>Illumination ".round($line01*100,0)."% and decreasing</i>";
+	if($increasing) $message .= "<i>Illumination ".round($line01*100,0)."% and increasing</i><br />";
+	else $message .= "<i>Illumination ".round($line01*100,0)."% and decreasing</i><br />";
+
+	$time = time();
+	$cmd = "swetest -g -head -p1 -fZ -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<71 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += ($i-1) * 3600;
+	$cmd = "swetest -g -head -p1 -fZ -s1m -n60 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += ($i-1) * 60;
+	$cmd = "swetest -g -head -p1 -fZ -s1s -n60 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += $i + 1;
+	$message .= "<i>&#57908;".$moon_sign_emoji($next_sign)." on ".date("m-d",$time)." at ".date("G:i:s",$time)."</i><br />";
+	$cmd = "swetest -g -head -p1 -fZ -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<71 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += ($i-1) * 3600;
+	$cmd = "swetest -g -head -p1 -fZ -s1m -n60 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += ($i-1) * 60;
+	$cmd = "swetest -g -head -p1 -fZ -s1s -n60 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += $i + 1;
+	$message .= "<i>&#57908;".$moon_sign_emoji($next_sign)." on ".date("m-d",$time)." at ".date("G:i:s",$time)."</i><br />";
+	$cmd = "swetest -g -head -p1 -fZ -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<71 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += ($i-1) * 3600;
+	$cmd = "swetest -g -head -p1 -fZ -s1m -n60 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += ($i-1) * 60;
+	$cmd = "swetest -g -head -p1 -fZ -s1s -n60 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
+	$results = array();
+	exec($cmd,$results);
+	$current_sign = substr($results[0],3,2);
+	$next_sign = $current_sign;
+	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
+	$time += $i + 1;
+	$message .= "<i>&#57908;".$moon_sign_emoji($next_sign)." on ".date("m-d",$time)." at ".date("G:i:s",$time)."</i><br />";
 
 	$this->reply($data, $message);
     }
