@@ -34,8 +34,8 @@ class TestSender Extends DiscordFunctions
     {
         $message = $this->myReplace("<br />", "\n", $message);
         $message = $this->myReplace("<br>", "\n", $message);
-        $message = html_entity_decode($message);
         $message = strip_tags($message);
+        $message = html_entity_decode($message);
         return $message;
     }
 
