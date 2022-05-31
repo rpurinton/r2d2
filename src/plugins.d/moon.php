@@ -15,19 +15,19 @@ $funcs[] = function ($data)
     {
         $moonPhase = function ($input,$increasing)
         {
-		if($input >= 0 && $input <= 0.125) return "<b>&#127761; New Moon</b>";
-		if($input >= 0.875 && $input <= 1) return "<b>&#127765; Full Moon</b>";
+		if($input >= 0 && $input <= 0.125) return "&#127761; New Moon";
+		if($input >= 0.875 && $input <= 1) return "&#127765; Full Moon";
 		if($increasing)
 		{
-			if($input >= 0.125 && $input <= 0.375) return "<b>&#127762; Waxing Cresent</b>";
-			if($input >= 0.375 && $input <= 0.625) return "<b>&#127763; First Quarter</b>";
-			if($input >= 0.625 && $input <= 0.875) return "<b>&#127764; Waxing Gibbous</b>";
+			if($input >= 0.125 && $input <= 0.375) return "&#127762; Waxing Cresent";
+			if($input >= 0.375 && $input <= 0.625) return "&#127763; First Quarter";
+			if($input >= 0.625 && $input <= 0.875) return "&#127764; Waxing Gibbous";
 		}
 		else
 		{
-			if($input >= 0.625 && $input <= 0.875) return "<b>&#127766; Waning Gibbous</b>";
-			if($input >= 0.375 && $input <= 0.625) return "<b>&#127767; Last Quarter</b>";
-			if($input >= 0.125 && $input <= 0.375) return "<b>&#127768; Waning Crescent</b>";
+			if($input >= 0.625 && $input <= 0.875) return "&#127766; Waning Gibbous";
+			if($input >= 0.375 && $input <= 0.625) return "&#127767; Last Quarter";
+			if($input >= 0.125 && $input <= 0.375) return "&#127768; Waning Crescent";
 		}
 	};
 
@@ -67,10 +67,7 @@ $funcs[] = function ($data)
 
 	$increasing = $line01 < $line11;
 
-	$message = $moonPhase($line01,$increasing)." <i>in</i> <b>".$moon_sign_emoji($line001)."</b><br />";
-
-	if($increasing) $message .= "<i>Illumination ".round($line01*100,0)."% and increasing</i><br />";
-	else $message .= "<i>Illumination ".round($line01*100,0)."% and decreasing</i><br />";
+	$message = "<b>".round($line01*100,0)."% ".$moonPhase($line01,$increasing)."</b><i> in ".$moon_sign_emoji($line001)."<br />";
 
 	$time = time();
 	$cmd = "swetest -g -head -p1 -fZ -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
@@ -94,7 +91,8 @@ $funcs[] = function ($data)
 	$next_sign = $current_sign;
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
-	$message .= "<i>&#57908;".$moon_sign_emoji($next_sign)." on ".date("m-d",$time)." at ".date("G:i:s",$time)."</i><br />";
+	$message .= date("m-d",$time)." at ".date("H:i:s",$time)." &#57908;".$moon_sign_emoji($next_sign)."<br />";
+
 	$cmd = "swetest -g -head -p1 -fZ -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
 	$results = array();
 	exec($cmd,$results);
@@ -116,7 +114,8 @@ $funcs[] = function ($data)
 	$next_sign = $current_sign;
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
-	$message .= "<i>&#57908;".$moon_sign_emoji($next_sign)." on ".date("m-d",$time)." at ".date("G:i:s",$time)."</i><br />";
+	$message .= date("m-d",$time)." at ".date("H:i:s",$time)." &#57908;".$moon_sign_emoji($next_sign)."<br />";
+
 	$cmd = "swetest -g -head -p1 -fZ -s60m -n72 -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time);
 	$results = array();
 	exec($cmd,$results);
@@ -138,7 +137,7 @@ $funcs[] = function ($data)
 	$next_sign = $current_sign;
 	for($i=0;$i<59 && $next_sign == $current_sign;$i++) $next_sign = substr($results[$i+1],3,2);
 	$time += $i + 1;
-	$message .= "<i>&#57908;".$moon_sign_emoji($next_sign)." on ".date("m-d",$time)." at ".date("G:i:s",$time)."</i><br />";
+	$message .= date("m-d",$time)." at ".date("H:i:s",$time)." &#57908;".$moon_sign_emoji($next_sign)."</i><br />";
 
 	$this->reply($data, $message);
     }
