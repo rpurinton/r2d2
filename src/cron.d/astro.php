@@ -25,7 +25,7 @@ if($message != "")
 
 function getResults($time)
 {
-	$swecmd = "swetest -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time)." -roundmin -g -head -fpZS";
+	$swecmd = "/usr/local/bin/swetest -b".date("d.m.Y",$time)." -utc".date("G:i:s",$time)." -roundmin -g -head -fpZS";
 	exec($swecmd,$results);
 	foreach($results as $key => $result)
 	{
