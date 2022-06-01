@@ -18,7 +18,7 @@ foreach($results2 as $planet => $result2)
 
 if($message != "")
 {
-	require_once("../Worker.php");
+	require_once(__DIR__."/../Worker.php");
 	$worker = new \rpurinton\r2d2\Worker(0);
 	$worker->reply(["platform" => "highviber", "channel" => $worker->config["highviber"]["public_channel"]],$message);
 }
