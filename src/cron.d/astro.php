@@ -7,12 +7,12 @@ $results2 = getResults($time);
 
 foreach($results2 as $planet => $result2)
 {
-	if($results1[$planet]["sign"] !== $result2["sign"]) $message .= "<b>Astrology Update!</b><br ><i>".astro_planet_emoji($planet)." is now in ".astro_sign_emoji($result2["sign"])."</i>\n";
+	if($results1[$planet]["sign"] !== $result2["sign"]) $message .= "<b>Astrology Update!</b><br ><i>".astro_planet_emoji($planet)." is now in ".astro_sign_emoji($result2["sign"])."</i><br />";
 	if($results1[$planet]["retro"] !== $result2["retro"])
 	{
 		$message .= "<b>Astrology Update!</b><br /><i>".astro_planet_emoji($planet)." ( in ".astro_sign_emoji($result2["sign"])." ) is ";
-		if($result2["retro"] === "R") $message .= "now Retrograde</i>\n";
-		if($result2["retro"] === " ") $message .= "no longer Retrograde</i>\n";
+		if($result2["retro"] === "R") $message .= "now Retrograde</i><br />";
+		if($result2["retro"] === " ") $message .= "no longer Retrograde</i><br />";
 	}
 }
 
@@ -20,7 +20,7 @@ if($message != "")
 {
 	require_once("../Worker.php");
 	$worker = new \rpurinton\r2d2\Worker(0);
-	$worker->reply(array("platform" => "highviber", "channel" => $worker->config["highviber"]["public_channel"]),$message);
+	$worker->reply(["platform" => "highviber", "channel" => $worker->config["highviber"]["public_channel"]],$message);
 }
 
 function getResults($time)
