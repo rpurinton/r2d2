@@ -8,10 +8,10 @@ class DiscordFunctions Extends RabbitClient
 {
 
     protected
-            function testQueue($data, $message)
+            function cliQueue($data, $message)
     {
         $data["response"] = $message;
-        $this->publish("test_send", $data);
+        $this->publish("cli_send", $data);
     }
 
     protected

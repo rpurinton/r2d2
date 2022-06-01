@@ -116,8 +116,8 @@ class Worker Extends DiscordFunctions
         extract($data);
         switch ($platform)
         {
-            case "test":
-                $this->testQueue($data, $message);
+            case "cli":
+                $this->cliQueue($data, $message);
                 break;
             case "discord":
                 $this->discordQueue($channel, $message);

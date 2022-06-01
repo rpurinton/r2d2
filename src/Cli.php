@@ -4,7 +4,7 @@ namespace rpurinton\r2d2;
 
 require_once(__DIR__ . "/DiscordFunctions.php");
 
-class Test Extends DiscordFunctions
+class Cli Extends DiscordFunctions
 {
 
     protected
@@ -15,21 +15,22 @@ class Test Extends DiscordFunctions
     function __construct()
     {
         parent::__construct();
-        echo("r2d2 Test mode... use ^C or press...\nr2d2>");
-        $this->thread = new \parallel\Runtime(__DIR__ . "/TestSender.php");
+        echo("r2d2 CLI mode... ^C to exit...\nC:\>");
+        $this->thread = new \parallel\Runtime(__DIR__ . "/CliSender.php");
         $this->future = $this->thread->run(function ()
         {
-            new TestSender;
+            new CliSender;
         });
-        while ($line = trim(fgets(STDIN)))
+        while ($line = fgets(STDIN))
         {
             if ($this->future->done())
             {
                 $this->future = $this->thread->run(function ()
                 {
-                    new TestSender;
+                    new CliSender;
                 });
             }
+            $line = trim($line);
             switch($line)
             {
                 case "exit":
@@ -37,12 +38,26 @@ class Test Extends DiscordFunctions
                     $this->thread->kill();
                     die();
                     break;
+                case "start":
+                    passthru("r2d2 start");
+                    break;
+                case "stop":
+                    passthru("r2d2 stop");
+                    break;
+                case "restart":
+                    passthru("r2d2 restart");
+                    break;
+                case "reload":
+                    passthru("r2d2 reload");
+                    break;
+                case "status":
+                    passthru("r2d2 status");
+                    break;
                 default:
-                    echo("r2d2>");
-                    $packet["platform"] = "test";
+                    $packet["platform"] = "cli";
                     $packet["channel"] = "console";
                     $packet["userid"] = "101";
-                    $packet["username"] = "tester";
+                    $packet["username"] = "Console User";
                     $text = $line;
                     $packet["text"] = $text;
                     $packet["cmd"] = strtolower($this->firstname($text));
@@ -54,9 +69,10 @@ class Test Extends DiscordFunctions
                     {
                         $packet["vars"] = "";
                     }
-                    if($line === "debug") $this->publish("test_send", $packet);
+                    if($line === "debug") $this->publish("cli_send", $packet);
                     else $this->publish("worker", $packet);
             }
+            echo("C:\>");
         }
     }
 

@@ -5,7 +5,7 @@ namespace rpurinton\r2d2;
 require_once(__DIR__ . "/Logger.php");
 require_once(__DIR__ . "/Main.php");
 require_once(__DIR__ . "/Reload.php");
-require_once(__DIR__ . "/Test.php");
+require_once(__DIR__ . "/Cli.php");
 
 class ProcessManager
 {
@@ -36,7 +36,7 @@ class ProcessManager
                 break;
             case "logger": new Logger;
                 break;
-            case "test": new Test;
+            case "cli": new Cli;
                 break;
             default: die("ERROR: Invalid Command\n");
         }
