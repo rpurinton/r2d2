@@ -31,7 +31,7 @@ class Cli Extends DiscordFunctions
                 });
             }
             $line = trim($line);
-            switch($line)
+            switch ($line)
             {
                 case "exit":
                 case "quit":
@@ -69,8 +69,14 @@ class Cli Extends DiscordFunctions
                     {
                         $packet["vars"] = "";
                     }
-                    if($line === "debug") $this->publish("cli_send", $packet);
-                    else $this->publish("worker", $packet);
+                    if ($line === "debug")
+                    {
+                        $this->publish("cli_send", $packet);
+                    }
+                    else
+                    {
+                        $this->publish("worker", $packet);
+                    }
             }
             echo("C:\>");
         }

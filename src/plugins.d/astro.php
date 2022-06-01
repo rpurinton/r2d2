@@ -124,58 +124,82 @@ $funcs[] = function ($data)
         };
         $astro_planet_emoji = function ($input)
         {
-            if ($input == 0) return "☉ Sun    ";
-            if ($input == 1) return "☾ Moon   ";
-            if ($input == 2) return "☿ Mercury";
-            if ($input == 3) return "♀ Venus  ";
-            if ($input == 4) return "♂ Mars   ";
-            if ($input == 5) return "♃ Jupiter";
-            if ($input == 6) return "♄ Saturn ";
-            if ($input == 7) return "♅ Uranus ";
-            if ($input == 8) return "♆ Neptune";
-            if ($input == 9) return "♇ Pluto  ";
-            if ($input == 10) return "  T Node ";
-            if ($input == 12) return "  Lilith ";
+            switch ($input)
+            {
+                case 0: return "☉ Sun    ";
+                case 1: return "☾ Moon   ";
+                case 2: return "☿ Mercury";
+                case 3: return "♀ Venus  ";
+                case 4: return "♂ Mars   ";
+                case 5: return "♃ Jupiter";
+                case 6: return "♄ Saturn ";
+                case 7: return "♅ Uranus ";
+                case 8: return "♆ Neptune";
+                case 9: return "♇ Pluto  ";
+                case 10: return "  T Node ";
+                case 12: return "  Lilith ";
+            }
         };
 
         $message = "<pre>--Current Astrology Transit--<br />--" . gmdate("c") . "--<br />";
 
-	$swecmd = array();
-	$swecmd[] = "swetest";
-	$swecmd[] = "-b".date("d.m.Y");
-	$swecmd[] = "-utc".date("G:i:s");
-	$swecmd[] = "-roundmin";
-	$swecmd[] = "-g";
-	$swecmd[] = "-head";
-	$swecmd[] = "-fpZS";
-	$results = array();
-	exec(implode(" ",$swecmd),$results);
-	foreach($results as $key => $result)
-	{
-		$results[$key] = array();
-		$input = explode("\t",$result);
-		$input1 = $input[1];
-		$input1 = $this->myReplace("  "," ",$input1);
-		if(substr($input1,0,1) === " ") $input1 = substr($input1,1);
-		$input1 = explode(" ",$input1);
-		if(strlen($input1[0]) === 1) $results[$key]["degs"] = " ".$input1[0];
-		else $results[$key]["degs"] = $input1[0];
-		$results[$key]["sign"] = $input1[1];
-		if(strlen($input1[2]) === 1) $results[$key]["mins"] = "0".$input1[2];
-		else $results[$key]["mins"] = $input1[2];
-		$input2 = $input[2];
-		$input2 = $this->myReplace(" ","",$input2);
-		if(substr($input2,0,1) === "-") $results[$key]["retro"] = "R";
-		else $results[$key]["retro"] = " ";
-	}
+        $swecmd = array();
+        $swecmd[] = "swetest";
+        $swecmd[] = "-b" . date("d.m.Y");
+        $swecmd[] = "-utc" . date("G:i:s");
+        $swecmd[] = "-roundmin";
+        $swecmd[] = "-g";
+        $swecmd[] = "-head";
+        $swecmd[] = "-fpZS";
+        $results = array();
+        exec(implode(" ", $swecmd), $results);
+        foreach ($results as $key => $result)
+        {
+            $results[$key] = array();
+            $input = explode("\t", $result);
+            $input1 = $input[1];
+            $input1 = $this->myReplace("  ", " ", $input1);
+            if (substr($input1, 0, 1) === " ")
+            {
+                $input1 = substr($input1, 1);
+            }
+            $input1 = explode(" ", $input1);
+            if (strlen($input1[0]) === 1)
+            {
+                $results[$key]["degs"] = " " . $input1[0];
+            }
+            else
+            {
+                $results[$key]["degs"] = $input1[0];
+            }
+            $results[$key]["sign"] = $input1[1];
+            if (strlen($input1[2]) === 1)
+            {
+                $results[$key]["mins"] = "0" . $input1[2];
+            }
+            else
+            {
+                $results[$key]["mins"] = $input1[2];
+            }
+            $input2 = $input[2];
+            $input2 = $this->myReplace(" ", "", $input2);
+            if (substr($input2, 0, 1) === "-")
+            {
+                $results[$key]["retro"] = "R";
+            }
+            else
+            {
+                $results[$key]["retro"] = " ";
+            }
+        }
 
-	unset($results[11]);
+        unset($results[11]);
 
-	foreach($results as $key => $value)
-	{
-		$message .= $astro_planet_emoji($key)." ".$astro_sign_emoji($astro,$value["sign"])." ";
-		$message .= $value["degs"]."&deg;".$value["mins"]."'".$value["retro"]."\n";
-	}
+        foreach ($results as $key => $value)
+        {
+            $message .= $astro_planet_emoji($key) . " " . $astro_sign_emoji($astro, $value["sign"]) . " ";
+            $message .= $value["degs"] . "&deg;" . $value["mins"] . "'" . $value["retro"] . "\n";
+        }
 
         $message .= "-----------------------------<br />";
         $message .= "♂ Masculine " . $astro["masculine"] . " ♀ Feminine  " . $astro["feminine"] . "  <br />";

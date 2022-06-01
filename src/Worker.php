@@ -34,11 +34,15 @@ class Worker Extends DiscordFunctions
 
     function __destruct()
     {
-	if($this->sql != \null) $this->sql->close();
+        if ($this->sql != \null)
+        {
+            $this->sql->close();
+        }
         parent::__destruct();
     }
 
-    public function start()
+    public
+            function start()
     {
         $this->start_time = time();
         echo("Starting Worker {$this->worker_id}...\n");
@@ -50,7 +54,10 @@ class Worker Extends DiscordFunctions
             $data = json_decode($message->body, true);
             if ($data["channel"] == "command")
             {
-                if (!isset($data["command"]) || $data["command"] === "none") return;
+                if (!isset($data["command"]) || $data["command"] === "none")
+                {
+                    return;
+                }
                 if ($data["command"] == "reload")
                 {
                     if ($data["worker_id"] == $this->worker_id)
