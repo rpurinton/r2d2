@@ -18,16 +18,16 @@ $funcs[] = function ($data)
  V | 500  Love          | A 
  E | 400  Reason        | N 
  S | 350  Acceptance    | D 
-   | 310  Willingness   |   
+   | 310  Willingness   | S 
  - | 250  Neutrality    | - 
-   | 200  Courage       |   
-   | 175  Pride         | C 
- F | 150  Anger         | O 
- E | 125  Desire        | N 
- A | 100  Fear          | T 
- R |  75  Grief         | R 
- S |  50  Apathy        | A 
-   |  30  Guilt         | C 
-   |  20  Shame         | T </pre>");
+   | 200  Courage       | C 
+   | 175  Pride         | O 
+ F | 150  Anger         | N 
+ E | 125  Desire        | T 
+ A | 100  Fear          | R 
+ R |  75  Grief         | A 
+ S |  50  Apathy        | C 
+   |  30  Guilt         | T 
+   |  20  Shame         | S </pre>");
     }
 };
