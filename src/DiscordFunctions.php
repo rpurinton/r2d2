@@ -23,7 +23,7 @@ class DiscordFunctions Extends RabbitClient
         }
     }
 
-    protected
+    public
             function myLog($message)
     {
         $this->discordQueue($this->config["discord"]["log_channel"], $message);
