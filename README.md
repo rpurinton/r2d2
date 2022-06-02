@@ -38,7 +38,7 @@ Help and command documentation is available at [r2d2bot.tk](https://r2d2bot.tk)
 - MariaDB/MySQL
 - RabbitMQ
 - WebServer required for HTML Docs
-= Swiss Ephemeris Binary/Executable (for Astrology Functions)
+- Swiss Ephemeris Binary/Executable (swetest) (for Astrology Functions)
 ## Installation
 
 #### Download source code 
@@ -98,14 +98,14 @@ Before starting r2d2 you must ensure `mysql`, `rabbitmq-server`, `httpd`, `crond
 `r2d2` alone will start CLI mode. 
 
 #### Static Commands
--`start`
--`stop`
--`status`
--`restart`
--`reload`
--`debug`
--`exit`
--`quit`
+- `start`
+- `stop`
+- `status`
+- `restart`
+- `reload`
+- `debug`
+- `exit`
+- `quit`
 
 Other than the above commands, anything you type will be treated as simulated message, passed to the worker for processing and the response will be provided (with HTML and markdown stripped).  Type debug once to enable debugging mode to see the details of the data packet in the response with html included.
 
