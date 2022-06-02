@@ -107,6 +107,7 @@ class ComposerStaticInit0553646540816296be223e2df0237967
         ),
         'C' => 
         array (
+            'Composer\\CaBundle\\' => 18,
             'Carbon\\' => 7,
         ),
         'A' => 
@@ -125,6 +126,7 @@ class ComposerStaticInit0553646540816296be223e2df0237967
             'Amp\\Cache\\' => 10,
             'Amp\\ByteStream\\' => 15,
             'Amp\\' => 4,
+            'Abraham\\TwitterOAuth\\' => 21,
         ),
     );
 
@@ -244,9 +246,9 @@ class ComposerStaticInit0553646540816296be223e2df0237967
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri-interfaces/src',
-            1 => __DIR__ . '/..' . '/league/uri-parser/src',
-            2 => __DIR__ . '/..' . '/league/uri/src',
+            0 => __DIR__ . '/..' . '/league/uri/src',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces/src',
+            2 => __DIR__ . '/..' . '/league/uri-parser/src',
         ),
         'Kelunik\\Certificate\\' => 
         array (
@@ -268,6 +270,10 @@ class ComposerStaticInit0553646540816296be223e2df0237967
         array (
             0 => __DIR__ . '/..' . '/discord/interactions/discord',
             1 => __DIR__ . '/..' . '/team-reflex/discord-php/src/Discord',
+        ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
         'Carbon\\' => 
         array (
@@ -329,6 +335,10 @@ class ComposerStaticInit0553646540816296be223e2df0237967
         'Amp\\' => 
         array (
             0 => __DIR__ . '/..' . '/amphp/amp/lib',
+        ),
+        'Abraham\\TwitterOAuth\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/abraham/twitteroauth/src',
         ),
     );
 
