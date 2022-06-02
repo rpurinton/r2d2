@@ -15,40 +15,40 @@ $funcs[] = function ($data)
     {
         $moon_phase_name = function ($input, $increasing)
         {
-            if ($input >= 0 && $input <= 0.125)
+            if ($input >= 0 && $input <= 0.05)
             {
                 return "New Moon";
             }
-            if ($input >= 0.875 && $input <= 1)
+            if ($input >= 0.95 && $input <= 1)
             {
                 return "Full Moon";
             }
             if ($increasing)
             {
-                if ($input >= 0.125 && $input <= 0.375)
+                if ($input >= 0.05 && $input <= 0.35)
                 {
                     return "Waxing Cresent";
                 }
-                if ($input >= 0.375 && $input <= 0.625)
+                if ($input >= 0.35 && $input <= 0.65)
                 {
                     return "First Quarter";
                 }
-                if ($input >= 0.625 && $input <= 0.875)
+                if ($input >= 0.65 && $input <= 0.95)
                 {
                     return "Waxing Gibbous";
                 }
             }
             else
             {
-                if ($input >= 0.625 && $input <= 0.875)
+                if ($input >= 0.65 && $input <= 0.95)
                 {
                     return "Waning Gibbous";
                 }
-                if ($input >= 0.375 && $input <= 0.625)
+                if ($input >= 0.35 && $input <= 0.65)
                 {
                     return "Last Quarter";
                 }
-                if ($input >= 0.125 && $input <= 0.375)
+                if ($input >= 0.05 && $input <= 0.35)
                 {
                     return "Waning Crescent";
                 }
@@ -57,40 +57,40 @@ $funcs[] = function ($data)
 
         $moon_phase_emoji = function ($input, $increasing)
         {
-            if ($input >= 0 && $input <= 0.125)
+            if ($input >= 0 && $input <= 0.05)
             {
                 return "&#127761;";
             }
-            if ($input >= 0.875 && $input <= 1)
+            if ($input >= 0.95 && $input <= 1)
             {
                 return "&#127765;";
             }
             if ($increasing)
             {
-                if ($input >= 0.125 && $input <= 0.375)
+                if ($input >= 0.05 && $input <= 0.35)
                 {
                     return "&#127762;";
                 }
-                if ($input >= 0.375 && $input <= 0.625)
+                if ($input >= 0.35 && $input <= 0.65)
                 {
                     return "&#127763;";
                 }
-                if ($input >= 0.625 && $input <= 0.875)
+                if ($input >= 0.65 && $input <= 0.95)
                 {
                     return "&#127764;";
                 }
             }
             else
             {
-                if ($input >= 0.625 && $input <= 0.875)
+                if ($input >= 0.65 && $input <= 0.95)
                 {
                     return "&#127766;";
                 }
-                if ($input >= 0.375 && $input <= 0.625)
+                if ($input >= 0.35 && $input <= 0.65)
                 {
                     return "&#127767;";
                 }
-                if ($input >= 0.125 && $input <= 0.375)
+                if ($input >= 0.05 && $input <= 0.35)
                 {
                     return "&#127768;";
                 }
