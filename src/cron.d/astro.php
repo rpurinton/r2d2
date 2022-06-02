@@ -34,7 +34,6 @@ if ($message != "")
 
 function tweet($message)
 {
-	require_once(__DIR__."/../vendor/autoload.php");
 	require_once(__DIR__ . "/../Worker.php");
 	$worker = new \rpurinton\r2d2\Worker(0);
 	$twitter = $worker->config["twitter"];
