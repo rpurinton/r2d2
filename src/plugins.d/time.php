@@ -16,7 +16,7 @@ $funcs[] = function ($data)
         $tz["Europe/London"] = "London";
         $tz["Europe/Rome"] = "Rome";
         $tz["Europe/Moscow"] = "Moscow";
-        $tz["Asia/Calcutta"] = "Mumbai";
+        $tz["Asia/Calcutta"] = "Shihara";
         $tz["Asia/Tokyo"] = "Tokyo";
         $tz["Australia/Melbourne"] = "Melbourne";
 
