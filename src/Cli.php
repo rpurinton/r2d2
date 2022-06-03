@@ -66,33 +66,33 @@ class Cli Extends DiscordFunctions
                 case "status":
                     passthru("r2d2 status");
                     break;
+                case "debug":
+                    $this->publish("cli_send", $this->makePacket($line));
+                    break;
                 default:
-                    $packet["platform"] = "cli";
-                    $packet["channel"] = "console";
-                    $packet["userid"] = "101";
-                    $packet["username"] = "Console User";
-                    $text = $line;
-                    $packet["text"] = $text;
-                    $packet["cmd"] = strtolower($this->firstname($text));
-                    if (strpos($text, " ") !== false)
-                    {
-                        $packet["vars"] = substr($text, strpos($text, " ") + 1);
-                    }
-                    else
-                    {
-                        $packet["vars"] = "";
-                    }
-                    if ($line === "debug")
-                    {
-                        $this->publish("cli_send", $packet);
-                    }
-                    else
-                    {
-                        $this->publish("worker", $packet);
-                    }
+                    $this->publish("worker", $this->makePacket($line));
             }
             echo(">");
         }
+    }
+
+    private function makePacket($text)
+    {
+        $packet["platform"] = "cli";
+        $packet["channel"] = "console";
+        $packet["userid"] = "101";
+        $packet["username"] = "Console User";
+        $packet["text"] = $text;
+        $packet["cmd"] = strtolower($this->firstname($text));
+        if (strpos($text, " ") !== false)
+        {
+            $packet["vars"] = substr($text, strpos($text, " ") + 1);
+        }
+        else
+        {
+            $packet["vars"] = "";
+        }
+        return $packet;
     }
 
     function __destruct()
