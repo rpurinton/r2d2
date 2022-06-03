@@ -16,30 +16,26 @@ class CliSender Extends DiscordFunctions
         $this->mq_chan->basic_consume("cli_send", "cli_sender", false, true, false, false, function ($message)
         {
             $data = json_decode($message->body, true);
-            if ($data["channel"] === "console")
+            switch($data["cmd"])
             {
-                switch($data["cmd"])
-                {
-                    case "exit": posix_kill(posix_getpid(),SIGKILL);
-                    case "debug":
-                        $this->debug = !$this->debug;
-                        if ($this->debug)
-                        {
-                            echo("\rr2d2 debugging enabled\n>");
-                        }
-                        else
-                        {
-                            echo("\rr2d2 debugging disabled\n>");
-                        }
-                }
-            }
-            else
-            {
-                if ($this->debug)
-                {
-                    echo("\r" . print_r($data, true) . "\n");
-                }
-                echo("\r" . $this->cliClean($data["response"]) . "\n>");
+                case "exit": posix_kill(posix_getpid(),SIGKILL);
+                case "debug":
+                    $this->debug = !$this->debug;
+                    if ($this->debug)
+                    {
+                        echo("\rr2d2 debugging enabled\n>");
+                    }
+                    else
+                    {
+                        echo("\rr2d2 debugging disabled\n>");
+                    }
+                    break;
+                default:
+                    if ($this->debug)
+                    {
+                        echo("\r" . print_r($data, true) . "\n");
+                    }
+                    echo("\r" . $this->cliClean($data["response"]) . "\n>");
             }
         });
         $this->mq_chan->consume();

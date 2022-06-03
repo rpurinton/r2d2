@@ -49,7 +49,6 @@ class Cli Extends DiscordFunctions
                 case "exit":
                 case "quit":
                     $this->publish("cli_send", $this->makePacket("exit"));
-                    posix_kill(posix_getpid());
                 case "start":
                     passthru("r2d2 start");
                     break;
