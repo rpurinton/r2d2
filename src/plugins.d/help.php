@@ -4,7 +4,7 @@ $cmd = "help";
 $cmd_list[] = $cmd;
 $html_help[$cmd]["commands"][] = $cmd;
 $html_help[$cmd]["title"] = "Get Help With a Command";
-$html_help[$cmd]["desc"] = "Provides the description of a given command, a usage example, and related commands.  If a command is not specifed, a link to the documentation is provided.";
+$html_help[$cmd]["desc"] = "Provides the description of a given command, a usage example, and related commands.  Get detailed help at <a href=\"https://r2d2bot.tk\" target=\"_blank\">r2d2bot.tk</a>";
 $html_help[$cmd]["usages"][] = "!$cmd [optional command]";
 $html_help[$cmd]["usages"][] = "!$cmd";
 $html_help[$cmd]["usages"][] = "!$cmd commands";
@@ -15,6 +15,7 @@ $funcs[] = function ($data)
     if ($cmd == "!help")
     {
         $message = "";
+        if (isset($vars) && $vars === "") $vars = "help";
         if (isset($vars) && substr($vars, 0, 1) == "!") $vars = substr($vars, 1);
         if (isset($vars) && isset($this->html_help[strtolower($vars)]))
         {
