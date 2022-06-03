@@ -21,11 +21,11 @@ class CliSender Extends DiscordFunctions
                 $this->debug = !$this->debug;
                 if ($this->debug)
                 {
-                    echo("\rr2d2 debugging enabled\nC:\>");
+                    echo("\rr2d2 debugging enabled\n>");
                 }
                 else
                 {
-                    echo("\rr2d2 debugging disabled\nC:\>");
+                    echo("\rr2d2 debugging disabled\n>");
                 }
             }
             else
@@ -34,7 +34,7 @@ class CliSender Extends DiscordFunctions
                 {
                     echo("\r" . print_r($data, true) . "\n");
                 }
-                echo("\r" . $this->cliClean($data["response"]) . "\nC:\>");
+                echo("\r" . $this->cliClean($data["response"]) . "\n>");
             }
         });
         $this->mq_chan->consume();
