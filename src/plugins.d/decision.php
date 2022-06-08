@@ -18,7 +18,7 @@ $html_help[$cmd]["seealso"][] = "ask";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd !== "!8" && $cmd !== "!8ball" && $cmd !== "!9ball" && $cmd === "!yesno") return;
+    if ($cmd !== "!8" && $cmd !== "!8ball" && $cmd !== "!9ball" && $cmd !== "!yesno") return;
     $results[] = " it is certain &#128077;";
     $results[] = " it is decidedly so &#128077;";
     $results[] = " without a doubt &#128077;";
@@ -57,7 +57,7 @@ $html_help[$cmd]["seealso"][] = "8";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd !== "!ask" && $cmd !== "or") return;
+    if ($cmd !== "!ask" && $cmd !== "!or") return;
     $first = $this->firstname($username);
     $vars = $this->myReplace("?", "", $vars);
     $vars = $this->myReplace(" OR ", " or ", $vars);
