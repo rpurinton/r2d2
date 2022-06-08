@@ -18,31 +18,29 @@ $html_help[$cmd]["seealso"][] = "ask";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!8" || $cmd == "!8ball" || $cmd == "!9ball" || $cmd === "!yesno")
-    {
-        $results[] = " it is certain &#128077;";
-        $results[] = " it is decidedly so &#128077;";
-        $results[] = " without a doubt &#128077;";
-        $results[] = " yes definitely &#128077;";
-        $results[] = " you may rely on it &#128077;";
-        $results[] = " as i see it, yes &#128077;";
-        $results[] = " most likely &#128077;";
-        $results[] = " outlook good &#128077;";
-        $results[] = " yes &#128077;";
-        $results[] = " signs point to yes &#128077;";
-        $results[] = " reply hazy, try again";
-        $results[] = " ask again later";
-        $results[] = " better not tell you now";
-        $results[] = " cannot predict now";
-        $results[] = " concentrate and ask again";
-        $results[] = " don't count on it &#128078;";
-        $results[] = " my reply is no &#128078;";
-        $results[] = " my sources say no &#128078;";
-        $results[] = " outlook not so good &#128078;";
-        $results[] = " very doubtful &#128078;";
-        $first = $this->firstname($username);
-        $this->reply($data, "@$first &#127921; " . $results[array_rand($results)]);
-    }
+    if ($cmd !== "!8" && $cmd !== "!8ball" && $cmd !== "!9ball" && $cmd === "!yesno") return;
+    $results[] = " it is certain &#128077;";
+    $results[] = " it is decidedly so &#128077;";
+    $results[] = " without a doubt &#128077;";
+    $results[] = " yes definitely &#128077;";
+    $results[] = " you may rely on it &#128077;";
+    $results[] = " as i see it, yes &#128077;";
+    $results[] = " most likely &#128077;";
+    $results[] = " outlook good &#128077;";
+    $results[] = " yes &#128077;";
+    $results[] = " signs point to yes &#128077;";
+    $results[] = " reply hazy, try again";
+    $results[] = " ask again later";
+    $results[] = " better not tell you now";
+    $results[] = " cannot predict now";
+    $results[] = " concentrate and ask again";
+    $results[] = " don't count on it &#128078;";
+    $results[] = " my reply is no &#128078;";
+    $results[] = " my sources say no &#128078;";
+    $results[] = " outlook not so good &#128078;";
+    $results[] = " very doubtful &#128078;";
+    $first = $this->firstname($username);
+    $this->reply($data, "@$first &#127921; " . $results[array_rand($results)]);
 };
 
 $cmd = "ask";
@@ -59,20 +57,18 @@ $html_help[$cmd]["seealso"][] = "8";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!ask" || $cmd === "!ask")
+    if ($cmd !== "!ask" && $cmd !== "or") return;
+    $first = $this->firstname($username);
+    $vars = $this->myReplace("?", "", $vars);
+    $vars = $this->myReplace(" OR ", " or ", $vars);
+    $vars = $this->myReplace(" oR ", " or ", $vars);
+    $vars = $this->myReplace(" Or ", " or ", $vars);
+    $inarr = explode(" or ", $vars);
+    if (sizeof($inarr) === 1)
     {
-        $first = $this->firstname($username);
-        $vars = $this->myReplace("?", "", $vars);
-        $vars = $this->myReplace(" OR ", " or ", $vars);
-        $vars = $this->myReplace(" oR ", " or ", $vars);
-        $vars = $this->myReplace(" Or ", " or ", $vars);
-        $inarr = explode(" or ", $vars);
-        if (sizeof($inarr) === 1)
-        {
-            return $this->reply($data, "@$first: $vars or what?");
-        }
-        $this->reply($data, "@$first: " . $inarr[array_rand($inarr)]);
+        return $this->reply($data, "@$first: $vars or what?");
     }
+    $this->reply($data, "@$first: " . $inarr[array_rand($inarr)]);
 };
 
 $cmd = "flip";
@@ -86,27 +82,25 @@ $html_help[$cmd]["seealso"][] = "ask";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!flip")
+    if ($cmd !== "!flip") return;
+    $first = $this->firstname($username);
+    mysqli_select_db($this->sql, "chatbot");
+    $rand = rand(0, 1);
+    if ($rand === 1)
     {
-        $first = $this->firstname($username);
-        mysqli_select_db($this->sql, "chatbot");
-        $rand = rand(0, 1);
-        if ($rand === 1)
-        {
-            mysqli_query($this->sql, "UPDATE `users` SET `heads` = `heads`+1 WHERE `userid` = '$userid'");
-            if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'")))
-            {
-                extract($result);
-                return $this->reply($data, "@$first: it's heads... heads: $heads tails: $tails");
-            }
-            else return $this->reply($data, "@$first: it's heads");
-        }
-        mysqli_query($this->sql, "UPDATE `users` SET `tails` = `tails`+1 WHERE `userid` = '$userid'");
+        mysqli_query($this->sql, "UPDATE `users` SET `heads` = `heads`+1 WHERE `userid` = '$userid'");
         if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'")))
         {
             extract($result);
-            return $this->reply($data, "@$first: it's tails... heads: $heads tails: $tails");
+            return $this->reply($data, "@$first: it's heads... heads: $heads tails: $tails");
         }
-        else return $this->reply($data, "@$first: it's tails");
+        else return $this->reply($data, "@$first: it's heads");
     }
+    mysqli_query($this->sql, "UPDATE `users` SET `tails` = `tails`+1 WHERE `userid` = '$userid'");
+    if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'")))
+    {
+        extract($result);
+        return $this->reply($data, "@$first: it's tails... heads: $heads tails: $tails");
+    }
+    else return $this->reply($data, "@$first: it's tails");
 };

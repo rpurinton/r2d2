@@ -20,22 +20,20 @@ $funcs[] = function ($data)
         $result = $this->logSql($userid, $username, $text);
         if ($result) $this->reply($data, $this->firstname($username) . " has earned <b>Level $result</b> &#127942;");
     }
-    if ($cmd == "!level")
+    if ($cmd !== "!level") return;
+    mysqli_select_db($this->sql, "chatbot");
+    if ($vars === "") $vars = $username;
+    $targetnew = mysqli_real_escape_string($this->sql, $vars);
+    $query = "SELECT * FROM `users` WHERE `username` LIKE '%$targetnew%' ORDER BY `message_count` DESC LIMIT 0,1;";
+    $result = mysqli_query($this->sql, $query);
+    if (mysqli_num_rows($result))
     {
-        mysqli_select_db($this->sql, "chatbot");
-        if ($vars === "") $vars = $username;
-        $targetnew = mysqli_real_escape_string($this->sql, $vars);
-        $query = "SELECT * FROM `users` WHERE `username` LIKE '%$targetnew%' ORDER BY `message_count` DESC LIMIT 0,1;";
-        $result = mysqli_query($this->sql, $query);
-        if (mysqli_num_rows($result))
-        {
-            extract(mysqli_fetch_assoc($result));
-            $level = $this->getLevel($message_count);
-            $togo = $this->levels_reverse[$level + 1] - $message_count;
-            return $this->reply($data, $this->firstname($username) . " is level $level ($message_count messages)<br />$togo more messages to level up!");
-        }
-        $this->reply($data, "no users like \"$vars\" have been seen");
+        extract(mysqli_fetch_assoc($result));
+        $level = $this->getLevel($message_count);
+        $togo = $this->levels_reverse[$level + 1] - $message_count;
+        return $this->reply($data, $this->firstname($username) . " is level $level ($message_count messages)<br />$togo more messages to level up!");
     }
+    $this->reply($data, "no users like \"$vars\" have been seen");
 };
 
 $cmd = "levels";
@@ -50,15 +48,13 @@ $html_help[$cmd]["seealso"][] = "seen";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!levels")
+    if ($cmd !== "!levels") return;
+    $result = "Level Requirements...<br /><pre>";
+    for ($i = 10; $i < 101; $i += 10)
     {
-        $result = "Level Requirements...<br /><pre>";
-        for ($i = 10; $i < 101; $i += 10)
-        {
-            $result .= "Level $i: " . number_format($this->levels_reverse[$i], 0, ".", ",") . " msgs\r\n";
-        }
-        $this->reply($data, $result . "</pre>");
+        $result .= "Level $i: " . number_format($this->levels_reverse[$i], 0, ".", ",") . " msgs\r\n";
     }
+    $this->reply($data, $result . "</pre>");
 };
 
 $cmd = "top";
@@ -73,27 +69,25 @@ $html_help[$cmd]["seealso"][] = "seen";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!top")
+    if ($cmd !== "!top") return;
+    mysqli_select_db($this->sql, "chatbot");
+    $query = "SELECT * FROM `users` ORDER BY `message_count` DESC LIMIT 0,10;";
+    $result = mysqli_query($this->sql, $query);
+    $i = 0;
+    $results = "<pre>-- Top 10 Chat Contributors --<br />";
+    while ($row = mysqli_fetch_assoc($result))
     {
-        mysqli_select_db($this->sql, "chatbot");
-        $query = "SELECT * FROM `users` ORDER BY `message_count` DESC LIMIT 0,10;";
-        $result = mysqli_query($this->sql, $query);
-        $i = 0;
-        $results = "<pre>-- Top 10 Chat Contributors --<br />";
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            extract($row);
-            $i++;
-            if ($i === 1) $results .= "&#129351; ";
-            if ($i === 2) $results .= "&#129352; ";
-            if ($i === 3) $results .= "&#129353; ";
-            if ($i > 3 && $i < 10) $results .= " $i ";
-            if ($i == 10) $results .= "10 ";
-            $first = $this->firstname($username);
-            while (strlen($first) < 10) $first .= " ";
-            $first = substr($first, 0, 10);
-            $results .= "$first - lvl " . $this->getLevel($message_count) . " ($message_count)<br />";
-        }
-        $this->reply($data, $results . "---- since April 30, 2022 ----</pre>");
+        extract($row);
+        $i++;
+        if ($i === 1) $results .= "&#129351; ";
+        if ($i === 2) $results .= "&#129352; ";
+        if ($i === 3) $results .= "&#129353; ";
+        if ($i > 3 && $i < 10) $results .= " $i ";
+        if ($i == 10) $results .= "10 ";
+        $first = $this->firstname($username);
+        while (strlen($first) < 10) $first .= " ";
+        $first = substr($first, 0, 10);
+        $results .= "$first - lvl " . $this->getLevel($message_count) . " ($message_count)<br />";
     }
+    $this->reply($data, $results . "---- since April 30, 2022 ----</pre>");
 };
