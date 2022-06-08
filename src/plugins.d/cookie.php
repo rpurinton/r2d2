@@ -11,41 +11,35 @@ $html_help[$cmd]["seealso"][] = "oracle";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!cookie")
+    if ($cmd !== "!cookie") return;
+    mysqli_select_db($this->sql, "cookie");
+    extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `proverbs` ORDER BY RAND() LIMIT 0,1")));
+    extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `lessons` ORDER BY RAND() LIMIT 0,1")));
+    $lotto = array();
+    for ($i = 1; $i < 70; $i++)
     {
-        mysqli_select_db($this->sql, "cookie");
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `proverbs` ORDER BY RAND() LIMIT 0,1")));
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `lessons` ORDER BY RAND() LIMIT 0,1")));
-
-        $lotto = array();
-        for ($i = 1; $i < 70; $i++)
-        {
-            $lotto[$i] = $i;
-        }
-        for ($i = 0; $i < 5; $i++)
-        {
-            $randkey = array_rand($lotto);
-            $balls[] = $randkey;
-            unset($lotto[$randkey]);
-        }
-        sort($balls);
-        $powerball = rand(1, 26);
-
-        $first = $this->firstname($username);
-        $message = "&#129376; a fortune cookie for $first...<br />";
-        $message .= "<i>\"$proverb\"</i><br />";
-
-        $message .= "Lucky Numbers:";
-        foreach ($balls as $ball)
-        {
-            $message .= " $ball";
-        }
-        $message .= "<br />Powerball: $powerball<br />";
-
-        $message .= "Learn Chinese: $chinese<br />";
-        $message .= "Pronounced: $pronounce<br />";
-        $message .= "English: $english";
-        $this->reply($data, $message);
+        $lotto[$i] = $i;
     }
+    for ($i = 0; $i < 5; $i++)
+    {
+        $randkey = array_rand($lotto);
+        $balls[] = $randkey;
+        unset($lotto[$randkey]);
+    }
+    sort($balls);
+    $powerball = rand(1, 26);
+    $first = $this->firstname($username);
+    $message = "&#129376; a fortune cookie for $first...<br />";
+    $message .= "<i>\"$proverb\"</i><br />";
+    $message .= "Lucky Numbers:";
+    foreach ($balls as $ball)
+    {
+        $message .= " $ball";
+    }
+    $message .= "<br />Powerball: $powerball<br />";
+    $message .= "Learn Chinese: $chinese<br />";
+    $message .= "Pronounced: $pronounce<br />";
+    $message .= "English: $english";
+    $this->reply($data, $message);
 };
 

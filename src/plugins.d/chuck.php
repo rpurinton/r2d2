@@ -12,10 +12,8 @@ $html_help[$cmd]["seealso"][] = "love";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!chuck" || $cmd == "!fact")
-    {
-        $requestUrl = "https://api.chucknorris.io/jokes/random";
-        $results = json_decode(file_get_contents($requestUrl), true);
-        $this->reply($data, "True Fact: " . $results["value"]);
-    }
+    if ($cmd !== "!chuck" && $cmd !== "!fact") return;
+    $requestUrl = "https://api.chucknorris.io/jokes/random";
+    $results = json_decode(file_get_contents($requestUrl), true);
+    $this->reply($data, "True Chuck Norris Fact: " . $results["value"]);
 };

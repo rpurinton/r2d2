@@ -12,14 +12,12 @@ $html_help[$cmd]["seealso"][] = "slap";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!cwtch")
+    if ($cmd != "!cwtch") return;
+    if ($vars == "")
     {
-        if ($vars == "")
-        {
-            $vars = $this->firstname($username);
-        }
-        $this->reply($data, "<i>*cwtches $vars*</i> &#129303;");
+        $vars = $this->firstname($username);
     }
+    $this->reply($data, "<i>*cwtches $vars*</i> &#129303;");
 };
 
 $cmd = "slap";
@@ -34,9 +32,7 @@ $html_help[$cmd]["seealso"][] = "cwtch";
 $funcs[] = function ($data)
 {
     extract($data);
-    if ($cmd == "!slap")
-    {
-        if ($vars == "") $vars = $this->firstname($username);
-        $this->reply($data, "<i>slaps $vars around a bit with a large trout</i>");
-    }
+    if ($cmd != "!slap") return;
+    if ($vars == "") $vars = $this->firstname($username);
+    $this->reply($data, "<i>slaps $vars around a bit with a large trout</i>");
 };
