@@ -65,8 +65,8 @@ class DiscordFunctions Extends RabbitClient
         $message = $this->myReplace("</b>", "**", $message);
         $message = $this->myReplace("<u>", "__", $message);
         $message = $this->myReplace("</u>", "__", $message);
-        $message = $this->myReplace("<pre>", "`", $message);
-        $message = $this->myReplace("</pre>", "`", $message);
+        $message = $this->myReplace("<pre>", "```", $message);
+        $message = $this->myReplace("</pre>", "```", $message);
         while (strpos($message, "<a href") !== false)
         {
             $pos = strpos($message, "<a href");
