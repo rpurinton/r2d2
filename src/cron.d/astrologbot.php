@@ -9,12 +9,12 @@ foreach ($results2 as $planet => $result2)
 {
     if ($results1[$planet]["sign"] !== $result2["sign"])
     {
-        $message .= astro_planet_emoji($planet)." is now officially in ".astro_sign_emoji($result2["sign"]);
+        $message .= astro_planet_emoji($planet)." now in ".astro_sign_emoji($result2["sign"]);
         $message .= "\n".astro_planet_hashtag($planet).astro_sign_hashtag($result2["sign"])."#astrology\n";
     }
     if ($results1[$planet]["retro"] !== $result2["retro"])
     {
-        $message .= astro_planet_emoji($planet)." is now officially ";
+        $message .= astro_planet_emoji($planet)." now ";
         if ($result2["retro"] === "R") $message .= "retrograde";
         if ($result2["retro"] === " ") $message .= "direct";
         $message .= "\n".astro_planet_hashtag($planet).astro_sign_hashtag($result2["sign"])."#astrology\n";
@@ -106,16 +106,16 @@ function astro_planet_emoji($planet)
 {
     switch ($planet)
     {
-        case 0: return "☉ The Sun";
+        case 0: return "&#9728; The Sun";
         case 1: return moon_phase_emoji()." The Moon";
-        case 2: return "☿ Mercury";
-        case 3: return "♀ Venus";
-        case 4: return "♂ Mars";
-        case 5: return "♃ Jupiter";
-        case 6: return "♄ Saturn";
-        case 7: return "♅ Uranus";
-        case 8: return "♆ Neptune";
-        case 9: return "♇ Pluto";
+        case 2: return "(☿) Mercury";
+        case 3: return "(♀) Venus";
+        case 4: return "(♂) Mars";
+        case 5: return "(♃) Jupiter";
+        case 6: return "(♄) Saturn";
+        case 7: return "(♅) Uranus";
+        case 8: return "(♆) Neptune";
+        case 9: return "(♇) Pluto";
         case 10: return "True Node";
         case 12: return "Lilith";
     }
