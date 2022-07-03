@@ -18,7 +18,6 @@ $funcs[] = function ($data)
         $scissors = "&#9986;";
 
         $first = $this->firstname($username);
-        mysqli_select_db($this->sql, "chatbot");
         $rand = rand(0, 2);
         if ($rand === 0)
         {
@@ -67,7 +66,6 @@ $funcs[] = function ($data)
         $paper = "&#129531;";
         $scissors = "&#9986;";
         $first = $this->firstname($username);
-        mysqli_select_db($this->sql, "chatbot");
         $rand = rand(0, 2);
         if ($rand === 0)
         {
@@ -117,7 +115,6 @@ $funcs[] = function ($data)
         $scissors = "&#9986;";
 
         $first = $this->firstname($username);
-        mysqli_select_db($this->sql, "chatbot");
         $rand = rand(0, 2);
         if ($rand === 0)
         {

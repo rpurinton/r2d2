@@ -16,7 +16,6 @@ $funcs[] = function ($data)
     if ($cmd == "!zen")
     {
         if ($vars != "" && (!is_numeric($vars) || $vars < 1 || $vars > 101)) return $this->reply($data, "number must be between 1 and 101");
-        mysqli_select_db($this->sql, "koans");
         if ($vars === "")
         {
             $query = "SELECT * FROM `koans` ORDER BY RAND() LIMIT 0,1;";

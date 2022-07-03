@@ -21,7 +21,6 @@ $funcs[] = function ($data)
         if ($result) $this->reply($data, $this->firstname($username) . " has earned <b>Level $result</b> &#127942;");
     }
     if ($cmd !== "!level") return;
-    mysqli_select_db($this->sql, "chatbot");
     if ($vars === "") $vars = $username;
     $targetnew = mysqli_real_escape_string($this->sql, $vars);
     $query = "SELECT * FROM `users` WHERE `username` LIKE '%$targetnew%' ORDER BY `message_count` DESC LIMIT 0,1;";
@@ -70,7 +69,6 @@ $funcs[] = function ($data)
 {
     extract($data);
     if ($cmd !== "!top") return;
-    mysqli_select_db($this->sql, "chatbot");
     $query = "SELECT * FROM `users` ORDER BY `message_count` DESC LIMIT 0,10;";
     $result = mysqli_query($this->sql, $query);
     $i = 0;

@@ -50,7 +50,6 @@ $funcs[] = function ($data)
             if ($input == "Pluto") return "♇ The Pluto Card";
         };
 
-        mysqli_select_db($this->sql, "oracle");
         $first = $this->firstname($username);
         $message = "Oracle cards requested by $first...<br /><br />";
 

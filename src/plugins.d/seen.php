@@ -19,7 +19,6 @@ $funcs[] = function ($data)
         {
             return $this->reply($data, "you must use !seen &lt;name&gt;");
         }
-        mysqli_select_db($this->sql, "chatbot");
         $targetnew = mysqli_real_escape_string($this->sql, $vars);
         $query = "SELECT * FROM `users` WHERE `username` LIKE '%$targetnew%' ORDER BY `message_count` DESC LIMIT 0,1;";
         $result = mysqli_query($this->sql, $query);

@@ -95,6 +95,7 @@ class Worker Extends DiscordFunctions
         extract($this->config["sql"]);
         $this->sql = mysqli_connect($host, $user, $pass)
                 or die("sql connection error\n");
+        mysqli_select_db($this->sql, $this->config["sql"]["database"]);
     }
 
     protected
@@ -166,7 +167,6 @@ class Worker Extends DiscordFunctions
     protected
             function logSql($userid, $username, $message)
     {
-        mysqli_select_db($this->sql, "chatbot");
         $username = mysqli_real_escape_string($this->sql, $username);
         $message = mysqli_real_escape_string($this->sql, $message);
         mysqli_query($this->sql, "INSERT INTO `users` (`userid`,`username`,`message_count`,`last_text`) VALUES ('$userid','$username',1,'$message') ON DUPLICATE KEY UPDATE `username` = '$username', `message_count` = `message_count` + 1, `last_text` = '$message'");

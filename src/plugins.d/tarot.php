@@ -20,7 +20,6 @@ $funcs[] = function ($data)
     if ($cmd == "!tarot")
     {
         $first = $this->firstname($username);
-        mysqli_select_db($this->sql, "tarot");
         extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` ORDER BY RAND() LIMIT 0,1")));
         $reverse = rand(0, 1);
         if ($reverse === 1)
@@ -53,7 +52,6 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd == "!daily")
     {
-        mysqli_select_db($this->sql, "tarot");
         for ($i = 1; $i < 79; $i++)
         {
             $deck[$i] = $i;
@@ -121,7 +119,6 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd == "!dream")
     {
-        mysqli_select_db($this->sql, "tarot");
         for ($i = 1; $i < 79; $i++)
         {
             $deck[$i] = $i;
@@ -194,7 +191,6 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd == "!relationship")
     {
-        mysqli_select_db($this->sql, "tarot");
         for ($i = 1; $i < 79; $i++)
         {
             $deck[$i] = $i;

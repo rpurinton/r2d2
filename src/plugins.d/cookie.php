@@ -12,7 +12,6 @@ $funcs[] = function ($data)
 {
     extract($data);
     if ($cmd !== "!cookie") return;
-    mysqli_select_db($this->sql, "cookie");
     extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `proverbs` ORDER BY RAND() LIMIT 0,1")));
     extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `lessons` ORDER BY RAND() LIMIT 0,1")));
     $lotto = array();

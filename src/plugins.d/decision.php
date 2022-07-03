@@ -84,7 +84,6 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd !== "!flip") return;
     $first = $this->firstname($username);
-    mysqli_select_db($this->sql, "chatbot");
     $rand = rand(0, 1);
     if ($rand === 1)
     {
