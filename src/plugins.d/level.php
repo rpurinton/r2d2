@@ -22,12 +22,12 @@ $funcs[] = function ($data)
     }
     if ($cmd !== "!level") return;
     if ($vars === "") $vars = $username;
-    $targetnew = mysqli_real_escape_string($this->sql, $vars);
+    $targetnew = $this->sql->escape($vars);
     $query = "SELECT * FROM `users` WHERE `username` LIKE '%$targetnew%' ORDER BY `message_count` DESC LIMIT 0,1;";
-    $result = mysqli_query($this->sql, $query);
-    if (mysqli_num_rows($result))
+    $result = $this->sql->query($query);
+    if ($this->sql->numRows($result))
     {
-        extract(mysqli_fetch_assoc($result));
+        extract($this->sql->assoc($result));
         $level = $this->getLevel($message_count);
         $togo = $this->levels_reverse[$level + 1] - $message_count;
         return $this->reply($data, $this->firstname($username) . " is level $level ($message_count messages)<br />$togo more messages to level up!");
@@ -70,10 +70,10 @@ $funcs[] = function ($data)
     extract($data);
     if ($cmd !== "!top") return;
     $query = "SELECT * FROM `users` ORDER BY `message_count` DESC LIMIT 0,10;";
-    $result = mysqli_query($this->sql, $query);
+    $result = $this->sql->query($query);
     $i = 0;
     $results = "<pre>-- Top 10 Chat Contributors --<br />";
-    while ($row = mysqli_fetch_assoc($result))
+    while ($row = $this->sql->assoc($result))
     {
         extract($row);
         $i++;

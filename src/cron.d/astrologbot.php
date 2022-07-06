@@ -68,18 +68,18 @@ function astro_sign_emoji($sign)
 {
     switch ($sign)
     {
-        case "ar": return "Aries ♈︎";
-        case "ta": return "Taurus ♉︎";
-        case "ge": return "Gemini ♊︎";
-        case "cn": return "Cancer ♋︎";
-        case "le": return "Leo ♌︎";
-        case "vi": return "Virgo ♍︎";
-        case "li": return "Libra ♎︎";
-        case "sc": return "Scorpio ♏︎";
-        case "sa": return "Sagittarius ♐︎";
-        case "cp": return "Capricorn ♑︎";
-        case "aq": return "Aquarius ♒︎";
-        case "pi": return "Pisces ♓︎";
+        case "ar": return "Aries &#9800;";
+        case "ta": return "Taurus &#9801;";
+        case "ge": return "Gemini &#9802;";
+        case "cn": return "Cancer &#9803;";
+        case "le": return "Leo &#9804;";
+        case "vi": return "Virgo &#9805;";
+        case "li": return "Libra &#9806;";
+        case "sc": return "Scorpio &#9807;";
+        case "sa": return "Sagittarius &#9808;";
+        case "cp": return "Capricorn &#9809;";
+        case "aq": return "Aquarius &#9810;";
+        case "pi": return "Pisces &#98011;";
     }
 }
 

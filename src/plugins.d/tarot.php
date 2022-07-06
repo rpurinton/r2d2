@@ -20,7 +20,7 @@ $funcs[] = function ($data)
     if ($cmd == "!tarot")
     {
         $first = $this->firstname($username);
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` ORDER BY RAND() LIMIT 0,1")));
+        extract($this->sql->single("SELECT * FROM `cards` ORDER BY RAND() LIMIT 0,1"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -61,7 +61,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>What things are on your mind? What are you thinking about a lot today?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -74,7 +74,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>How are your emotions today? What is the dominant feeling for today?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -87,7 +87,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>What tasks are you focused on accomplishing today?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -129,7 +129,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>What feelings did this dream stem from? What was the underlying emotion behind it?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -143,7 +143,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>What is the dream trying to tell me?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -157,7 +157,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>How can I apply this dream's lessons to my waking life?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -201,7 +201,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>What is your role in this relationship? How do you perceive yourself, and how does that affect your partnership?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -215,7 +215,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>How would you describe the relationship? What are the characteristics of it?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {
@@ -229,7 +229,7 @@ $funcs[] = function ($data)
         $card = array_rand($deck);
         unset($deck[$card]);
         $message .= "<b>What is their role in the relationship? How do you perceive your partner? And how does that affect the partnership?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `cards` WHERE `id` = '$card'")));
+        extract($this->sql->single("SELECT * FROM `cards` WHERE `id` = '$card'"));
         $reverse = rand(0, 1);
         if ($reverse === 1)
         {

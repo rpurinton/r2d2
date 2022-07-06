@@ -3,6 +3,7 @@
 namespace rpurinton\r2d2;
 
 require_once(__DIR__ . "/DiscordFunctions.php");
+require_once(__DIR__ . "/Sql.php");
 
 class Worker Extends DiscordFunctions
 {
@@ -32,21 +33,12 @@ class Worker Extends DiscordFunctions
         $this->worker_id = $id;
     }
 
-    function __destruct()
-    {
-        if ($this->sql != \null)
-        {
-            $this->sql->close();
-        }
-        parent::__destruct();
-    }
-
     public
             function start()
     {
         $this->start_time = time();
         echo("Starting Worker {$this->worker_id}...\n");
-        $this->sqlConnect();
+        $this->sql = new Sql;
         $this->defineLevels();
         $this->loadPlugins();
         $this->mq_chan->basic_consume("worker", "worker{$this->worker_id}", false, true, false, false, function ($message)
@@ -87,15 +79,6 @@ class Worker Extends DiscordFunctions
             }
         });
         $this->mq_chan->consume();
-    }
-
-    protected
-            function sqlConnect()
-    {
-        extract($this->config["sql"]);
-        $this->sql = mysqli_connect($host, $user, $pass)
-                or die("sql connection error\n");
-        mysqli_select_db($this->sql, $this->config["sql"]["database"]);
     }
 
     protected
@@ -167,10 +150,10 @@ class Worker Extends DiscordFunctions
     protected
             function logSql($userid, $username, $message)
     {
-        $username = mysqli_real_escape_string($this->sql, $username);
-        $message = mysqli_real_escape_string($this->sql, $message);
-        mysqli_query($this->sql, "INSERT INTO `users` (`userid`,`username`,`message_count`,`last_text`) VALUES ('$userid','$username',1,'$message') ON DUPLICATE KEY UPDATE `username` = '$username', `message_count` = `message_count` + 1, `last_text` = '$message'");
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `message_count` FROM `users` WHERE `userid` = '$userid'")));
+        $username = $this->sql->escape($username);
+        $message = $this->sql->escape($message);
+        $this->sql->query("INSERT INTO `users` (`userid`,`username`,`message_count`,`last_text`) VALUES ('$userid','$username',1,'$message') ON DUPLICATE KEY UPDATE `username` = '$username', `message_count` = `message_count` + 1, `last_text` = '$message'");
+        extract($this->sql->single("SELECT `message_count` FROM `users` WHERE `userid` = '$userid'"));
         if (isset($this->levels[$message_count]))
         {
             return $this->levels[$message_count];

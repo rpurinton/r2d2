@@ -19,10 +19,10 @@ $funcs[] = function ($data)
         {
             return $this->reply($data, "you must use !seen &lt;name&gt;");
         }
-        $targetnew = mysqli_real_escape_string($this->sql, $vars);
+        $targetnew = $this->sql->escape($vars);
         $query = "SELECT * FROM `users` WHERE `username` LIKE '%$targetnew%' ORDER BY `message_count` DESC LIMIT 0,1;";
-        $result = mysqli_query($this->sql, $query);
-        if (mysqli_num_rows($result))
+        $result = $this->sql->query($query);
+        if ($this->sql->numRows($result))
         {
             $time_human = function ($seconds)
             {
@@ -56,7 +56,7 @@ $funcs[] = function ($data)
                 return "$days $daytext and $hours2 $hourtext";
             };
 
-            extract(mysqli_fetch_assoc($result));
+            extract($this->sql->assoc($result));
             $lasttime = strtotime($last_time);
             $timediff = time() - $lasttime;
             $timehuman = $time_human($timediff);

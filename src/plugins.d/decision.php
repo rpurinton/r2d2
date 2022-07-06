@@ -87,16 +87,16 @@ $funcs[] = function ($data)
     $rand = rand(0, 1);
     if ($rand === 1)
     {
-        mysqli_query($this->sql, "UPDATE `users` SET `heads` = `heads`+1 WHERE `userid` = '$userid'");
-        if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'")))
+        $this->sql->query("UPDATE `users` SET `heads` = `heads`+1 WHERE `userid` = '$userid'");
+        if ($result = $this->sql->single("SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'"))
         {
             extract($result);
             return $this->reply($data, "@$first: it's heads... heads: $heads tails: $tails");
         }
         else return $this->reply($data, "@$first: it's heads");
     }
-    mysqli_query($this->sql, "UPDATE `users` SET `tails` = `tails`+1 WHERE `userid` = '$userid'");
-    if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'")))
+    $this->sql->query("UPDATE `users` SET `tails` = `tails`+1 WHERE `userid` = '$userid'");
+    if ($result = $this->sql->single("SELECT `heads`,`tails` FROM `users` WHERE `userid` = '$userid'"))
     {
         extract($result);
         return $this->reply($data, "@$first: it's tails... heads: $heads tails: $tails");

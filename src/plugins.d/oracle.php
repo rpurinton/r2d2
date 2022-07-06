@@ -54,19 +54,19 @@ $funcs[] = function ($data)
         $message = "Oracle cards requested by $first...<br /><br />";
 
         $message .= "<b>Where in my life does this affect?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `houses` ORDER BY RAND() LIMIT 0,1")));
+        extract($this->sql->single("SELECT * FROM `houses` ORDER BY RAND() LIMIT 0,1"));
         $message .= "&#127183;$name - <i>$meaning</i><br /><br />";
 
         $message .= "<b>How am I approaching the situation?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `signs` ORDER BY RAND() LIMIT 0,1")));
+        extract($this->sql->single("SELECT * FROM `signs` ORDER BY RAND() LIMIT 0,1"));
         $message .= "" . $oracle_sign_get_emoji($name) . " - <i>$meaning</i><br /><br />";
 
         $message .= "<b>What part of my personality is involved?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `planets` ORDER BY RAND() LIMIT 0,1")));
+        extract($this->sql->single("SELECT * FROM `planets` ORDER BY RAND() LIMIT 0,1"));
         $message .= "" . $oracle_planet_get_emoji($name) . " - <i>$meaning</i><br /><br />";
 
         $message .= "<b>Guidance going foward from here?</b><br />";
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT * FROM `phases` ORDER BY RAND() LIMIT 0,1")));
+        extract($this->sql->single("SELECT * FROM `phases` ORDER BY RAND() LIMIT 0,1"));
         $message .= "$name - <i>$meaning</i>";
 
         $this->reply($data, $message);

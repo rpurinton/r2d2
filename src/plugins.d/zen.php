@@ -24,7 +24,7 @@ $funcs[] = function ($data)
         {
             $query = "SELECT * FROM `koans` WHERE `id` = $vars";
         }
-        extract(mysqli_fetch_assoc(mysqli_query($this->sql, $query)));
+        extract($this->sql->single($query));
         $this->reply($data, "<b><u>Zen Koan $id - $title</u></b><br /><i>$text</i>");
     }
 };

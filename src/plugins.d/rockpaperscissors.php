@@ -21,8 +21,8 @@ $funcs[] = function ($data)
         $rand = rand(0, 2);
         if ($rand === 0)
         {
-            mysqli_query($this->sql, "UPDATE `users` SET `tie` = `tie`+1 WHERE `userid` = '$userid'");
-            if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+            $this->sql->query("UPDATE `users` SET `tie` = `tie`+1 WHERE `userid` = '$userid'");
+            if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
             {
                 extract($result);
                 return $this->reply($data, "@$first: $rock, Me: $rock, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
@@ -31,16 +31,16 @@ $funcs[] = function ($data)
         }
         if ($rand === 1)
         {
-            mysqli_query($this->sql, "UPDATE `users` SET `loss` = `loss`+1 WHERE `userid` = '$userid'");
-            if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+            $this->sql->query("UPDATE `users` SET `loss` = `loss`+1 WHERE `userid` = '$userid'");
+            if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
             {
                 extract($result);
                 return $this->reply($data, "@$first: $rock, Me: $paper, I win...<br />your personal record: W: $win L: $loss T: $tie");
             }
             else return $this->reply($data, "@$first: $rock, Me: $paper, I win");
         }
-        mysqli_query($this->sql, "UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
-        if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+        $this->sql->query("UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
+        if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
         {
             extract($result);
             return $this->reply($data, "@$first: $rock, Me: $scissors, You win...<br />your personal record: W: $win L: $loss T: $tie");
@@ -69,8 +69,8 @@ $funcs[] = function ($data)
         $rand = rand(0, 2);
         if ($rand === 0)
         {
-            mysqli_query($this->sql, "UPDATE `users` SET `tie` = `tie`+1 WHERE `userid` = '$userid'");
-            if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+            $this->sql->query("UPDATE `users` SET `tie` = `tie`+1 WHERE `userid` = '$userid'");
+            if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
             {
                 extract($result);
                 return $this->reply($data, "@$first: $paper, Me: $paper, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
@@ -79,16 +79,16 @@ $funcs[] = function ($data)
         }
         if ($rand === 1)
         {
-            mysqli_query($this->sql, "UPDATE `users` SET `loss` = `loss`+1 WHERE `userid` = '$userid'");
-            if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+            $this->sql->query("UPDATE `users` SET `loss` = `loss`+1 WHERE `userid` = '$userid'");
+            if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
             {
                 extract($result);
                 return $this->reply($data, "@$first: $paper, Me: $scissors, I win...<br />your personal record: W: $win L: $loss T: $tie");
             }
             else return $this->reply($data, "@$first: $paper, Me: $scissors, I win");
         }
-        mysqli_query($this->sql, "UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
-        if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+        $this->sql->query("UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
+        if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
         {
             extract($result);
             return $this->reply($data, "@$first: $paper, Me: $rock, You win...<br />your personal record: W: $win L: $loss T: $tie");
@@ -118,8 +118,8 @@ $funcs[] = function ($data)
         $rand = rand(0, 2);
         if ($rand === 0)
         {
-            mysqli_query($this->sql, "UPDATE `users` SET `tie` = `tie`+1 WHERE `userid` = '$userid'");
-            if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+            $this->sql->query("UPDATE `users` SET `tie` = `tie`+1 WHERE `userid` = '$userid'");
+            if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
             {
                 extract($result);
                 return $this->reply($data, "@$first: $scissors, Me: $scissors, it's a tie...<br />your personal record: W: $win L: $loss T: $tie");
@@ -128,16 +128,16 @@ $funcs[] = function ($data)
         }
         if ($rand === 1)
         {
-            mysqli_query($this->sql, "UPDATE `users` SET `loss` = `loss`+1 WHERE `userid` = '$userid'");
-            if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+            $this->sql->query("UPDATE `users` SET `loss` = `loss`+1 WHERE `userid` = '$userid'");
+            if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
             {
                 extract($result);
                 return $this->reply($data, "@$first: $scissors, Me: $rock, I win...<br />your personal record: W: $win L: $loss T: $tie");
             }
             else return $this->reply($data, "@$first: $scissors, Me: $rock, I win");
         }
-        mysqli_query($this->sql, "UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
-        if ($result = mysqli_fetch_assoc(mysqli_query($this->sql, "SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'")))
+        $this->sql->query("UPDATE `users` SET `win` = `win`+1 WHERE `userid` = '$userid'");
+        if ($result = $this->sql->single("SELECT `win`,`loss`,`tie` FROM `users` WHERE `userid` = '$userid'"))
         {
             extract($result);
             return $this->reply($data, "@$first: $scissors, Me: $paper, You win...<br />your personal record: W: $win L: $loss T: $tie");
