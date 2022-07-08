@@ -67,6 +67,12 @@ class Cli Extends DiscordFunctions
                 case "debug":
                     $this->publish("cli_send", $this->makePacket($line));
                     break;
+		case "check":
+                    $this->publish("worker", $this->makePacket("!workerid"));
+                    $this->publish("worker", $this->makePacket("!workerid"));
+                    $this->publish("worker", $this->makePacket("!workerid"));
+                    $this->publish("worker", $this->makePacket("!workerid"));
+                    break;
                 default:
                     $this->publish("worker", $this->makePacket($line));
             }
