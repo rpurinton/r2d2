@@ -144,6 +144,7 @@ $funcs[] = function ($data)
             $text == "thank you " ||
             strpos($text, "thanks r2") !== false ||
             strpos($text, "thank you r2") !== false ||
+            strpos($text, "ty r2") !== false ||
             strpos($text, "thanks every") !== false ||
             strpos($text, "thank you every") !== false ||
             strpos($text, "thanks all") !== false ||
