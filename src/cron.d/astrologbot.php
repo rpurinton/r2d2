@@ -79,7 +79,7 @@ function astro_sign_emoji($sign)
         case "sa": return "Sagittarius &#9808;";
         case "cp": return "Capricorn &#9809;";
         case "aq": return "Aquarius &#9810;";
-        case "pi": return "Pisces &#98011;";
+        case "pi": return "Pisces &#9811;";
     }
 }
 
